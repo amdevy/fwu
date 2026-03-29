@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme {
+  --color-wine: #6B3B40;
+  --color-wine-dark: #5A3035;
+  --color-forest: #2F4033;
+  --color-forest-light: #3A5040;
+  --color-sage: #848D7F;
+  --color-sand: #CFC6BD;
+  --color-sand-light: #DDD6CF;
+  --color-light-gray: #D9D9D9;
+  --color-off-white: #F5F5F4;
+  --color-black: #1A1A1A;
+  --color-white: #FFFFFF;
+
+  --font-heading: "Bodoni Moda", serif;
+  --font-body: "DM Sans", sans-serif;
+}
+
+/* Loading progress bar */
+@keyframes progress {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+/* Scroll indicator bounce */
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 2s ease-in-out infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-off-white);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-sage);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-wine);
+}
+
+/* Selection */
+::selection {
+  background: var(--color-wine);
+  color: var(--color-white);
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-black);
+  background-color: var(--color-off-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
