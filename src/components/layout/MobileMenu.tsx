@@ -7,18 +7,14 @@ import { useTranslations } from 'next-intl'
 import { LanguageSwitcher } from './LanguageSwitcher'
 import { useEffect } from 'react'
 
-const menuKeys = [
-  { key: 'home', href: '/' },
-  { key: 'Agency', href: '/agency', raw: true },
-  { key: 'Models', href: '/models', raw: true },
-  { key: 'Events', href: '/events', raw: true },
-  { key: 'Education', href: '/education', raw: true },
-  { key: 'Culture', href: '/culture', raw: true },
-  { key: 'Club', href: '/club', raw: true },
-  { key: 'designers', href: '/designers' },
-  { key: 'about', href: '/about' },
-  { key: 'contacts', href: '/contacts' },
-] as const
+const menuLinks = [
+  { label: 'Agency', href: '/agency' as const },
+  { label: 'Models', href: '/models' as const },
+  { label: 'Events', href: '/events' as const },
+  { label: 'Education', href: '/education' as const },
+  { label: 'Culture', href: '/culture' as const },
+  { label: 'Contacts', href: '/contacts' as const },
+]
 
 interface MobileMenuProps {
   isOpen: boolean
@@ -51,16 +47,14 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         >
           <div className="flex h-full flex-col px-6 py-6">
             <div className="flex items-center justify-between">
-              <span className="font-heading text-xl tracking-[0.15em] text-white uppercase">
-                Fashion West
-              </span>
+              <span className="font-heading text-base uppercase tracking-[0.2em] text-off-white">Fashion West</span>
               <button onClick={onClose} className="p-2 text-white" aria-label={t('closeMenu')}>
                 <X className="h-6 w-6" />
               </button>
             </div>
 
             <nav className="mt-12 flex flex-1 flex-col gap-1">
-              {menuKeys.map((item, i) => (
+              {menuLinks.map((item, i) => (
                 <motion.div
                   key={item.href}
                   initial={{ opacity: 0, x: -20 }}
@@ -72,7 +66,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                     onClick={onClose}
                     className="block py-3 font-heading text-2xl text-white/80 transition-colors hover:text-white"
                   >
-                    {'raw' in item && item.raw ? item.key : t(item.key)}
+                    {item.label}
                   </Link>
                 </motion.div>
               ))}
@@ -83,9 +77,9 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               <Link
                 href="/contacts"
                 onClick={onClose}
-                className="block w-full bg-wine py-3 text-center text-sm font-medium tracking-wide text-white uppercase"
+                className="block w-full bg-wine py-3 text-center text-xs font-medium tracking-widest text-white uppercase"
               >
-                {t('submitApplication')}
+                {t('joinPlatform')}
               </Link>
             </div>
           </div>
