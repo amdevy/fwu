@@ -1,11 +1,13 @@
 'use client'
 
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import { useState, useEffect } from 'react'
 import { Menu } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/utils'
 import { Navigation } from './Navigation'
 import { MobileMenu } from './MobileMenu'
+import { LanguageSwitcher } from './LanguageSwitcher'
 import { Button } from '@/components/ui/Button'
 
 interface HeaderProps {
@@ -13,6 +15,7 @@ interface HeaderProps {
 }
 
 export function Header({ transparent = false }: HeaderProps) {
+  const t = useTranslations('nav')
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
 
@@ -48,10 +51,14 @@ export function Header({ transparent = false }: HeaderProps) {
 
           <Navigation isTransparent={isTransparent} />
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
+            <div className="hidden lg:block">
+              <LanguageSwitcher variant={isTransparent ? 'light' : 'dark'} />
+            </div>
+
             <Link href="/contacts" className="hidden lg:block">
               <Button variant={isTransparent ? 'outline' : 'primary'} size="sm">
-                Заявка
+                {t('apply')}
               </Button>
             </Link>
 
@@ -61,7 +68,7 @@ export function Header({ transparent = false }: HeaderProps) {
                 'p-2 lg:hidden',
                 isTransparent ? 'text-white' : 'text-black'
               )}
-              aria-label="Відкрити меню"
+              aria-label={t('openMenu')}
             >
               <Menu className="h-6 w-6" />
             </button>

@@ -9,15 +9,18 @@ import { CTABlock } from '@/components/sections/CTABlock'
 import { ScrollReveal } from '@/components/sections/ScrollReveal'
 import { Button } from '@/components/ui/Button'
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
+import { useTranslations } from 'next-intl'
 
 export default function HomePage() {
+  const t = useTranslations('home')
+
   return (
     <>
       {/* 1.1 Hero */}
       <Hero
         title="Fashion West"
-        subtitle="Платформа моди, бізнесу та культури Закарпаття"
+        subtitle={t('heroSubtitle')}
         image="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1920&h=1080&fit=crop"
         fullHeight
         showScrollIndicator
@@ -25,12 +28,12 @@ export default function HomePage() {
         <div className="flex flex-wrap items-center justify-center gap-4">
           <Link href="#about">
             <Button variant="outline" size="lg">
-              Дізнатися більше
+              {t('learnMore')}
             </Button>
           </Link>
           <Link href="/contacts">
             <Button variant="primary" size="lg">
-              Приєднатися
+              {t('join')}
             </Button>
           </Link>
         </div>
@@ -41,15 +44,15 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-4 md:px-6">
           <div className="grid items-center gap-10 lg:grid-cols-5 lg:gap-16">
             <ScrollReveal className="lg:col-span-3">
-              <p className="text-sm tracking-wider text-sage uppercase">Про платформу</p>
+              <p className="text-sm tracking-wider text-sage uppercase">{t('aboutLabel')}</p>
               <h2 className="mt-3 font-heading text-3xl text-black uppercase md:text-4xl">
-                Що таке FWU
+                {t('aboutTitle')}
               </h2>
               <p className="mt-6 text-base leading-relaxed text-black/70">
-                FWU Platform — це екосистема, яка об&apos;єднує дизайнерів, моделей, підприємців та культурних діячів Закарпаття. Ми створюємо простір, де мода стає інструментом розвитку регіону, а кожен учасник отримує доступ до B2B-рішень, освітніх програм та подій міжнародного рівня.
+                {t('aboutText1')}
               </p>
               <p className="mt-4 text-base leading-relaxed text-black/70">
-                Наша місія — відчути та відобразити потенціал Закарпаття через моду, об&apos;єкти, людей і сенси. Платформа для тих, хто формує ідентичність регіону.
+                {t('aboutText2')}
               </p>
             </ScrollReveal>
 

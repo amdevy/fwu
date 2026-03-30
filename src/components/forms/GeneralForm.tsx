@@ -7,8 +7,10 @@ import { Button } from '@/components/ui/Button'
 import { FormSuccess } from './FormSuccess'
 import { useFormSubmit } from '@/hooks/useFormSubmit'
 import { generalFormSchema, type GeneralFormData } from '@/lib/validations'
+import { useTranslations } from 'next-intl'
 
 export function GeneralForm() {
+  const t = useTranslations('forms')
   const [errors, setErrors] = useState<Partial<Record<keyof GeneralFormData, string>>>({})
   const { submit, loading, success } = useFormSubmit({ url: '/api/forms/general' })
 
@@ -41,28 +43,28 @@ export function GeneralForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <Input id="name" name="name" label="Ім'я" placeholder="Ваше ім'я" error={errors.name} />
+      <Input id="name" name="name" label={t('name')} placeholder={t('namePlaceholder')} error={errors.name} />
       <Input
         id="contact"
         name="contact"
-        label="Телефон або email"
-        placeholder="+380... або email@..."
+        label={t('contact')}
+        placeholder={t('contactPlaceholder')}
         error={errors.contact}
       />
       <Textarea
         id="message"
         name="message"
-        label="Повідомлення"
-        placeholder="Ваше повідомлення..."
+        label={t('message')}
+        placeholder={t('messagePlaceholder')}
         error={errors.message}
       />
       <label className="flex items-start gap-2 text-xs text-sage">
         <input type="checkbox" name="gdprConsent" className="mt-0.5 accent-wine" />
-        <span>Я даю згоду на обробку персональних даних</span>
+        <span>{t('gdpr')}</span>
       </label>
       {errors.gdprConsent && <p className="text-xs text-wine">{errors.gdprConsent}</p>}
       <Button type="submit" loading={loading} className="w-full">
-        Надіслати
+        {t('submit')}
       </Button>
     </form>
   )

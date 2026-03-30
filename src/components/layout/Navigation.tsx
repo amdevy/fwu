@@ -1,17 +1,18 @@
 'use client'
 
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import { useState } from 'react'
 import { ChevronDown } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/utils'
 
 const directions = [
-  { label: 'Agency', href: '/agency' },
-  { label: 'Models', href: '/models' },
-  { label: 'Events', href: '/events' },
-  { label: 'Education', href: '/education' },
-  { label: 'Culture', href: '/culture' },
-  { label: 'Club', href: '/club' },
+  { label: 'Agency', href: '/agency' as const },
+  { label: 'Models', href: '/models' as const },
+  { label: 'Events', href: '/events' as const },
+  { label: 'Education', href: '/education' as const },
+  { label: 'Culture', href: '/culture' as const },
+  { label: 'Club', href: '/club' as const },
 ]
 
 interface NavigationProps {
@@ -19,6 +20,7 @@ interface NavigationProps {
 }
 
 export function Navigation({ isTransparent }: NavigationProps) {
+  const t = useTranslations('nav')
   const [dropdownOpen, setDropdownOpen] = useState(false)
 
   return (
@@ -34,7 +36,7 @@ export function Navigation({ isTransparent }: NavigationProps) {
             isTransparent ? 'text-white hover:text-sand' : 'text-black hover:text-wine'
           )}
         >
-          Напрямки
+          {t('directions')}
           <ChevronDown className={cn('h-4 w-4 transition-transform', dropdownOpen && 'rotate-180')} />
         </button>
 
@@ -62,7 +64,7 @@ export function Navigation({ isTransparent }: NavigationProps) {
           isTransparent ? 'text-white hover:text-sand' : 'text-black hover:text-wine'
         )}
       >
-        Дизайнери
+        {t('designers')}
       </Link>
 
       <Link
@@ -72,7 +74,7 @@ export function Navigation({ isTransparent }: NavigationProps) {
           isTransparent ? 'text-white hover:text-sand' : 'text-black hover:text-wine'
         )}
       >
-        Про нас
+        {t('about')}
       </Link>
 
       <Link
@@ -82,7 +84,7 @@ export function Navigation({ isTransparent }: NavigationProps) {
           isTransparent ? 'text-white hover:text-sand' : 'text-black hover:text-wine'
         )}
       >
-        Контакти
+        {t('contacts')}
       </Link>
     </nav>
   )

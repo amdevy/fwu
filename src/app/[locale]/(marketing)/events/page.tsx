@@ -9,8 +9,10 @@ import { PartnerForm } from '@/components/forms/PartnerForm'
 import { getUpcomingEvents, getPastEvents } from '@/lib/data'
 import Image from 'next/image'
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 
 export default function EventsPage() {
+  const t = useTranslations('events')
   const [formOpen, setFormOpen] = useState(false)
   const upcoming = getUpcomingEvents()
   const past = getPastEvents()
@@ -19,7 +21,7 @@ export default function EventsPage() {
     <>
       <Hero
         title="FWU Events"
-        subtitle="Анонси подій, показів та маркетів"
+        subtitle={t('subtitle')}
         image="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1920&h=1080&fit=crop"
       />
 
@@ -28,7 +30,7 @@ export default function EventsPage() {
         <div className="mx-auto max-w-7xl px-4 md:px-6">
           <ScrollReveal>
             <h2 className="font-heading text-3xl text-black uppercase md:text-4xl">
-              Найближчі події
+              {t('upcoming')}
             </h2>
           </ScrollReveal>
 
@@ -39,7 +41,7 @@ export default function EventsPage() {
           </div>
 
           {upcoming.length === 0 && (
-            <p className="mt-8 text-center text-sage">Наразі немає запланованих подій</p>
+            <p className="mt-8 text-center text-sage">{t('noEvents')}</p>
           )}
         </div>
       </section>
@@ -50,7 +52,7 @@ export default function EventsPage() {
           <div className="mx-auto max-w-7xl px-4 md:px-6">
             <ScrollReveal>
               <h2 className="font-heading text-3xl text-black uppercase md:text-4xl">
-                Минулі події
+                {t('past')}
               </h2>
             </ScrollReveal>
 
@@ -82,21 +84,21 @@ export default function EventsPage() {
         <div className="mx-auto max-w-3xl px-4 text-center md:px-6">
           <ScrollReveal>
             <h2 className="font-heading text-3xl text-white uppercase md:text-4xl">
-              Хочу організувати подію з FWU
+              {t('organizeTitle')}
             </h2>
             <p className="mt-4 text-white/70">
-              Ми допоможемо з організацією, промоцією та логістикою вашої модної події
+              {t('organizeSubtitle')}
             </p>
             <div className="mt-8">
               <Button variant="outline" size="lg" onClick={() => setFormOpen(true)}>
-                Стати партнером
+                {t('becomePartner')}
               </Button>
             </div>
           </ScrollReveal>
         </div>
       </section>
 
-      <Modal isOpen={formOpen} onClose={() => setFormOpen(false)} title="Організувати подію">
+      <Modal isOpen={formOpen} onClose={() => setFormOpen(false)} title={t('organizeEvent')}>
         <PartnerForm />
       </Modal>
     </>

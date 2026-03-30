@@ -7,12 +7,14 @@ import { Button } from '@/components/ui/Button'
 import { FormSuccess } from './FormSuccess'
 import { useFormSubmit } from '@/hooks/useFormSubmit'
 import { modelFormSchema, type ModelFormData } from '@/lib/validations'
+import { useTranslations } from 'next-intl'
 
 export function ModelForm() {
+  const t = useTranslations('forms')
   const [errors, setErrors] = useState<Partial<Record<keyof ModelFormData, string>>>({})
   const { submit, loading, success } = useFormSubmit({ url: '/api/forms/model' })
 
-  if (success) return <FormSuccess title="Заявку моделі відправлено!" />
+  if (success) return <FormSuccess title={t('successModel')} />
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -45,24 +47,24 @@ export function ModelForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <Input id="name" name="name" label="Ім'я та прізвище" placeholder="Ваше ім'я" error={errors.name} />
+      <Input id="name" name="name" label={t('fullName')} placeholder={t('namePlaceholder')} error={errors.name} />
       <div className="grid gap-4 sm:grid-cols-3">
-        <Input id="age" name="age" label="Вік" placeholder="18" type="number" error={errors.age} />
-        <Input id="height" name="height" label="Зріст (см)" placeholder="175" type="number" error={errors.height} />
-        <Input id="city" name="city" label="Місто" placeholder="Ужгород" error={errors.city} />
+        <Input id="age" name="age" label={t('age')} placeholder="18" type="number" error={errors.age} />
+        <Input id="height" name="height" label={t('height')} placeholder="175" type="number" error={errors.height} />
+        <Input id="city" name="city" label={t('city')} placeholder={t('cityPlaceholder')} error={errors.city} />
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
-        <Input id="phone" name="phone" label="Телефон" placeholder="+380..." error={errors.phone} />
-        <Input id="email" name="email" label="Email" placeholder="email@..." type="email" error={errors.email} />
+        <Input id="phone" name="phone" label={t('phone')} placeholder={t('phonePlaceholder')} error={errors.phone} />
+        <Input id="email" name="email" label={t('emailLabel')} placeholder={t('emailPlaceholder')} type="email" error={errors.email} />
       </div>
-      <Textarea id="experience" name="experience" label="Досвід (опціонально)" placeholder="Розкажіть про ваш досвід..." error={errors.experience} />
+      <Textarea id="experience" name="experience" label={t('experience')} placeholder={t('experiencePlaceholder')} error={errors.experience} />
       <label className="flex items-start gap-2 text-xs text-sage">
         <input type="checkbox" name="gdprConsent" className="mt-0.5 accent-wine" />
-        <span>Я даю згоду на обробку персональних даних</span>
+        <span>{t('gdpr')}</span>
       </label>
       {errors.gdprConsent && <p className="text-xs text-wine">{errors.gdprConsent}</p>}
       <Button type="submit" loading={loading} className="w-full">
-        Подати заявку
+        {t('applyModel')}
       </Button>
     </form>
   )

@@ -5,9 +5,11 @@ import { Button } from '@/components/ui/Button'
 import { Modal } from '@/components/ui/Modal'
 import { GeneralForm } from '@/components/forms/GeneralForm'
 import { ScrollReveal } from './ScrollReveal'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 export function CTABlock() {
+  const t = useTranslations('home')
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -25,21 +27,21 @@ export function CTABlock() {
         <div className="relative z-10 text-center px-4">
           <ScrollReveal>
             <h2 className="font-heading text-3xl text-white uppercase md:text-5xl">
-              Стань частиною FWU
+              {t('ctaTitle')}
             </h2>
             <p className="mt-4 text-white/70">
-              Залиште заявку і ми зв&apos;яжемося з вами
+              {t('ctaSubtitle')}
             </p>
             <div className="mt-8">
               <Button variant="primary" size="lg" onClick={() => setIsOpen(true)}>
-                Залишити заявку
+                {t('ctaButton')}
               </Button>
             </div>
           </ScrollReveal>
         </div>
       </section>
 
-      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Залишити заявку">
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title={t('ctaButton')}>
         <GeneralForm />
       </Modal>
     </>

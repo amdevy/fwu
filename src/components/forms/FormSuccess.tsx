@@ -2,16 +2,16 @@
 
 import { motion } from 'framer-motion'
 import { Check } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 interface FormSuccessProps {
   title?: string
   message?: string
 }
 
-export function FormSuccess({
-  title = 'Заявку відправлено!',
-  message = 'Ми зв\'яжемося з вами найближчим часом.',
-}: FormSuccessProps) {
+export function FormSuccess({ title, message }: FormSuccessProps) {
+  const t = useTranslations('forms')
+
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
@@ -26,8 +26,8 @@ export function FormSuccess({
       >
         <Check className="h-8 w-8 text-wine" />
       </motion.div>
-      <h3 className="mt-4 font-heading text-2xl text-black">{title}</h3>
-      <p className="mt-2 text-sm text-sage">{message}</p>
+      <h3 className="mt-4 font-heading text-2xl text-black">{title || t('successTitle')}</h3>
+      <p className="mt-2 text-sm text-sage">{message || t('successMessage')}</p>
     </motion.div>
   )
 }

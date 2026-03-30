@@ -1,22 +1,24 @@
 'use client'
 
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import { LanguageSwitcher } from './LanguageSwitcher'
 import { useEffect } from 'react'
 
-const menuItems = [
-  { label: 'Головна', href: '/' },
-  { label: 'Agency', href: '/agency' },
-  { label: 'Models', href: '/models' },
-  { label: 'Events', href: '/events' },
-  { label: 'Education', href: '/education' },
-  { label: 'Culture', href: '/culture' },
-  { label: 'Club', href: '/club' },
-  { label: 'Дизайнери', href: '/designers' },
-  { label: 'Про нас', href: '/about' },
-  { label: 'Контакти', href: '/contacts' },
-]
+const menuKeys = [
+  { key: 'home', href: '/' },
+  { key: 'Agency', href: '/agency', raw: true },
+  { key: 'Models', href: '/models', raw: true },
+  { key: 'Events', href: '/events', raw: true },
+  { key: 'Education', href: '/education', raw: true },
+  { key: 'Culture', href: '/culture', raw: true },
+  { key: 'Club', href: '/club', raw: true },
+  { key: 'designers', href: '/designers' },
+  { key: 'about', href: '/about' },
+  { key: 'contacts', href: '/contacts' },
+] as const
 
 interface MobileMenuProps {
   isOpen: boolean
@@ -24,6 +26,8 @@ interface MobileMenuProps {
 }
 
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+  const t = useTranslations('nav')
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden'
@@ -50,13 +54,13 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               <span className="font-heading text-xl tracking-[0.15em] text-white uppercase">
                 Fashion West
               </span>
-              <button onClick={onClose} className="p-2 text-white" aria-label="Закрити меню">
+              <button onClick={onClose} className="p-2 text-white" aria-label={t('closeMenu')}>
                 <X className="h-6 w-6" />
               </button>
             </div>
 
             <nav className="mt-12 flex flex-1 flex-col gap-1">
-              {menuItems.map((item, i) => (
+              {menuKeys.map((item, i) => (
                 <motion.div
                   key={item.href}
                   initial={{ opacity: 0, x: -20 }}
@@ -68,19 +72,20 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                     onClick={onClose}
                     className="block py-3 font-heading text-2xl text-white/80 transition-colors hover:text-white"
                   >
-                    {item.label}
+                    {'raw' in item && item.raw ? item.key : t(item.key)}
                   </Link>
                 </motion.div>
               ))}
             </nav>
 
-            <div className="border-t border-white/20 pt-6">
+            <div className="space-y-4 border-t border-white/20 pt-6">
+              <LanguageSwitcher variant="light" />
               <Link
                 href="/contacts"
                 onClick={onClose}
                 className="block w-full bg-wine py-3 text-center text-sm font-medium tracking-wide text-white uppercase"
               >
-                Залишити заявку
+                {t('submitApplication')}
               </Link>
             </div>
           </div>

@@ -2,22 +2,25 @@
 
 import { ScrollReveal } from './ScrollReveal'
 import { Briefcase, Megaphone, Palette, Users, Building2 } from 'lucide-react'
-
-const audiences = [
-  { icon: Briefcase, label: 'Підприємці' },
-  { icon: Megaphone, label: 'Медійники' },
-  { icon: Palette, label: 'Дизайнери' },
-  { icon: Users, label: 'Мешканці' },
-  { icon: Building2, label: 'Представники влади' },
-]
+import { useTranslations } from 'next-intl'
 
 export function AudienceSection() {
+  const t = useTranslations('home')
+
+  const audiences = [
+    { icon: Briefcase, label: t('audienceEntrepreneurs') },
+    { icon: Megaphone, label: t('audienceMedia') },
+    { icon: Palette, label: t('audienceDesigners') },
+    { icon: Users, label: t('audienceResidents') },
+    { icon: Building2, label: t('audienceOfficials') },
+  ]
+
   return (
     <section className="bg-sand py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-4 md:px-6">
         <ScrollReveal>
           <h2 className="text-center font-heading text-3xl text-black uppercase md:text-4xl">
-            Для кого платформа
+            {t('audienceTitle')}
           </h2>
         </ScrollReveal>
 

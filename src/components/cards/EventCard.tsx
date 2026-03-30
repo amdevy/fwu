@@ -1,12 +1,13 @@
 'use client'
 
-import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { MapPin, Calendar } from 'lucide-react'
 import { formatDate, formatPrice } from '@/lib/utils'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
+import { Link } from '@/i18n/navigation'
+import { useTranslations } from 'next-intl'
 import type { Event } from '@/types'
 
 interface EventCardProps {
@@ -15,6 +16,8 @@ interface EventCardProps {
 }
 
 export function EventCard({ event, index = 0 }: EventCardProps) {
+  const t = useTranslations('events')
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -34,7 +37,7 @@ export function EventCard({ event, index = 0 }: EventCardProps) {
           />
           {event.isPast && (
             <div className="absolute top-3 left-3">
-              <Badge>Завершено</Badge>
+              <Badge>{t('finished')}</Badge>
             </div>
           )}
         </div>
@@ -64,11 +67,11 @@ export function EventCard({ event, index = 0 }: EventCardProps) {
           {event.price ? (
             <span className="text-sm font-medium text-black">{formatPrice(event.price)}</span>
           ) : (
-            <span className="text-sm text-sage">Безкоштовно</span>
+            <span className="text-sm text-sage">{t('free')}</span>
           )}
           {!event.isPast && (
             <Button size="sm" variant="primary">
-              Купити квиток
+              {t('buyTicket')}
             </Button>
           )}
         </div>

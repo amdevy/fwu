@@ -2,52 +2,38 @@
 
 import { Hero } from '@/components/sections/Hero'
 import { ScrollReveal } from '@/components/sections/ScrollReveal'
-import { CTABlock } from '@/components/sections/CTABlock'
 import { Button } from '@/components/ui/Button'
 import { Modal } from '@/components/ui/Modal'
 import { PartnerForm } from '@/components/forms/PartnerForm'
 import { Briefcase, ShoppingBag, Palette, Handshake } from 'lucide-react'
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import { useState } from 'react'
-
-const services = [
-  {
-    icon: ShoppingBag,
-    title: 'Продаж дизайнерів',
-    description: 'Представляємо та просуваємо локальних дизайнерів на B2B ринку, допомагаємо з виходом на нових клієнтів.',
-  },
-  {
-    icon: Handshake,
-    title: 'B2B рішення',
-    description: 'Комплексні рішення для бутіків, рітейлерів та байєрів: від підбору колекцій до логістики.',
-  },
-  {
-    icon: Palette,
-    title: 'Капсульні колекції',
-    description: 'Розробка ексклюзивних капсульних колекцій разом із дизайнерами платформи під замовлення бренду.',
-  },
-  {
-    icon: Briefcase,
-    title: 'Стилістичний консалтинг',
-    description: 'Професійний консалтинг з питань стилю, формування асортименту та візуальної стратегії бренду.',
-  },
-]
-
-const audiences = [
-  { label: 'Бренди', description: 'Модні бренди, що шукають нових дизайнерів та колаборації' },
-  { label: 'Рітейлери', description: 'Мультибрендові магазини та бутіки' },
-  { label: 'Байєри', description: 'Професійні закупівельники для B2B-контрактів' },
-]
+import { useTranslations } from 'next-intl'
 
 export default function AgencyPage() {
+  const t = useTranslations('agency')
+  const tf = useTranslations('forms')
   const [formOpen, setFormOpen] = useState(false)
+
+  const services = [
+    { icon: ShoppingBag, title: t('service1Title'), description: t('service1Desc') },
+    { icon: Handshake, title: t('service2Title'), description: t('service2Desc') },
+    { icon: Palette, title: t('service3Title'), description: t('service3Desc') },
+    { icon: Briefcase, title: t('service4Title'), description: t('service4Desc') },
+  ]
+
+  const audiences = [
+    { label: t('audience1'), description: t('audience1Desc') },
+    { label: t('audience2'), description: t('audience2Desc') },
+    { label: t('audience3'), description: t('audience3Desc') },
+  ]
 
   return (
     <>
       <Hero
         title="FWU Agency"
-        subtitle="Продаж дизайнерів, B2B-рішення, комерційні пропозиції"
+        subtitle={t('subtitle')}
         image="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1920&h=1080&fit=crop"
       />
 
@@ -56,7 +42,7 @@ export default function AgencyPage() {
         <div className="mx-auto max-w-7xl px-4 md:px-6">
           <ScrollReveal>
             <h2 className="text-center font-heading text-3xl text-black uppercase md:text-4xl">
-              Що ми пропонуємо
+              {t('servicesTitle')}
             </h2>
           </ScrollReveal>
 
@@ -82,7 +68,7 @@ export default function AgencyPage() {
         <div className="mx-auto max-w-7xl px-4 md:px-6">
           <ScrollReveal>
             <h2 className="text-center font-heading text-3xl text-black uppercase md:text-4xl">
-              Для кого
+              {t('forWhom')}
             </h2>
           </ScrollReveal>
 
@@ -104,15 +90,15 @@ export default function AgencyPage() {
         <div className="mx-auto max-w-7xl px-4 md:px-6">
           <ScrollReveal>
             <h2 className="text-center font-heading text-3xl text-black uppercase md:text-4xl">
-              Кейси та портфоліо
+              {t('portfolioTitle')}
             </h2>
           </ScrollReveal>
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[
-              { title: 'Колаборація з OLENA K', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=400&fit=crop' },
-              { title: 'B2B контракт із мережею бутіків', image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&h=400&fit=crop' },
-              { title: 'Капсульна колекція ZAKARPATTIA', image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&h=400&fit=crop' },
+              { title: t('case1'), image: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=400&fit=crop' },
+              { title: t('case2'), image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&h=400&fit=crop' },
+              { title: t('case3'), image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&h=400&fit=crop' },
             ].map((item, i) => (
               <ScrollReveal key={item.title} delay={i * 0.1}>
                 <div className="group overflow-hidden">
@@ -138,18 +124,18 @@ export default function AgencyPage() {
         <div className="mx-auto max-w-3xl px-4 text-center md:px-6">
           <ScrollReveal>
             <h2 className="font-heading text-3xl text-white uppercase md:text-4xl">
-              Отримати комерційну пропозицію
+              {t('ctaTitle')}
             </h2>
             <p className="mt-4 text-white/70">
-              Залиште заявку і наша команда підготує індивідуальну пропозицію для вашого бізнесу
+              {t('ctaSubtitle')}
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <Button variant="outline" size="lg" onClick={() => setFormOpen(true)}>
-                Стати партнером
+                {t('becomePartner')}
               </Button>
               <Link href="/designers">
                 <Button variant="ghost" size="lg" className="text-white hover:text-white/80">
-                  Каталог дизайнерів
+                  {t('designerCatalog')}
                 </Button>
               </Link>
             </div>
@@ -157,7 +143,7 @@ export default function AgencyPage() {
         </div>
       </section>
 
-      <Modal isOpen={formOpen} onClose={() => setFormOpen(false)} title="Стати партнером">
+      <Modal isOpen={formOpen} onClose={() => setFormOpen(false)} title={t('becomePartner')}>
         <PartnerForm />
       </Modal>
     </>

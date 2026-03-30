@@ -8,19 +8,21 @@ import { Button } from '@/components/ui/Button'
 import { FormSuccess } from './FormSuccess'
 import { useFormSubmit } from '@/hooks/useFormSubmit'
 import { partnerFormSchema, type PartnerFormData } from '@/lib/validations'
-
-const partnershipTypes = [
-  { value: 'sponsor', label: 'Спонсор' },
-  { value: 'media', label: 'Медіа' },
-  { value: 'b2b', label: 'B2B' },
-  { value: 'other', label: 'Інше' },
-]
+import { useTranslations } from 'next-intl'
 
 export function PartnerForm() {
+  const t = useTranslations('forms')
   const [errors, setErrors] = useState<Partial<Record<keyof PartnerFormData, string>>>({})
   const { submit, loading, success } = useFormSubmit({ url: '/api/forms/partner' })
 
-  if (success) return <FormSuccess title="Заявку партнера відправлено!" />
+  const partnershipTypes = [
+    { value: 'sponsor', label: t('partnerSponsor') },
+    { value: 'media', label: t('partnerMedia') },
+    { value: 'b2b', label: t('partnerB2B') },
+    { value: 'other', label: t('partnerOther') },
+  ]
+
+  if (success) return <FormSuccess title={t('successPartner')} />
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -53,29 +55,29 @@ export function PartnerForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid gap-4 sm:grid-cols-2">
-        <Input id="name" name="name" label="Ім'я" placeholder="Ваше ім'я" error={errors.name} />
-        <Input id="company" name="company" label="Компанія" placeholder="Назва компанії" error={errors.company} />
+        <Input id="name" name="name" label={t('name')} placeholder={t('namePlaceholder')} error={errors.name} />
+        <Input id="company" name="company" label={t('company')} placeholder={t('companyPlaceholder')} error={errors.company} />
       </div>
       <Select
         id="partnershipType"
         name="partnershipType"
-        label="Тип партнерства"
-        placeholder="Оберіть тип"
+        label={t('partnershipType')}
+        placeholder={t('partnershipPlaceholder')}
         options={partnershipTypes}
         error={errors.partnershipType}
       />
       <div className="grid gap-4 sm:grid-cols-2">
-        <Input id="phone" name="phone" label="Телефон" placeholder="+380..." error={errors.phone} />
-        <Input id="email" name="email" label="Email" placeholder="email@..." type="email" error={errors.email} />
+        <Input id="phone" name="phone" label={t('phone')} placeholder={t('phonePlaceholder')} error={errors.phone} />
+        <Input id="email" name="email" label={t('emailLabel')} placeholder={t('emailPlaceholder')} type="email" error={errors.email} />
       </div>
-      <Textarea id="message" name="message" label="Повідомлення" placeholder="Деталі партнерства..." error={errors.message} />
+      <Textarea id="message" name="message" label={t('message')} placeholder={t('partnerDetailsPlaceholder')} error={errors.message} />
       <label className="flex items-start gap-2 text-xs text-sage">
         <input type="checkbox" name="gdprConsent" className="mt-0.5 accent-wine" />
-        <span>Я даю згоду на обробку персональних даних</span>
+        <span>{t('gdpr')}</span>
       </label>
       {errors.gdprConsent && <p className="text-xs text-wine">{errors.gdprConsent}</p>}
       <Button type="submit" loading={loading} className="w-full">
-        Надіслати заявку
+        {t('submitApplication')}
       </Button>
     </form>
   )

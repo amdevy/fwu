@@ -1,11 +1,12 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import { formatDate } from '@/lib/utils'
 import { Button } from '@/components/ui/Button'
 import { ScrollReveal } from './ScrollReveal'
 import { MapPin, Calendar } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import type { Event } from '@/types'
 
 const featuredEvent: Event = {
@@ -23,6 +24,8 @@ const featuredEvent: Event = {
 }
 
 export function FeaturedEvent() {
+  const t = useTranslations('home')
+
   return (
     <section className="bg-forest py-20 text-white md:py-28">
       <div className="mx-auto max-w-7xl px-4 md:px-6">
@@ -41,7 +44,7 @@ export function FeaturedEvent() {
 
           <ScrollReveal direction="right" delay={0.2}>
             <div>
-              <p className="text-sm tracking-wider text-white/40 uppercase">Актуальна подія</p>
+              <p className="text-sm tracking-wider text-white/40 uppercase">{t('featuredLabel')}</p>
               <h2 className="mt-3 font-heading text-3xl text-white md:text-4xl">
                 {featuredEvent.title}
               </h2>
@@ -62,7 +65,7 @@ export function FeaturedEvent() {
               <div className="mt-8">
                 <Link href={`/events/${featuredEvent.slug}`}>
                   <Button variant="outline" size="lg">
-                    Детальніше
+                    {t('details')}
                   </Button>
                 </Link>
               </div>

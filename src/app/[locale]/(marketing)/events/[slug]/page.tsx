@@ -9,19 +9,21 @@ import { getEventBySlug } from '@/lib/data'
 import { formatDate, formatPrice } from '@/lib/utils'
 import { Calendar, MapPin, Clock } from 'lucide-react'
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
+import { useTranslations } from 'next-intl'
 
 export default function EventDetailPage() {
   const { slug } = useParams<{ slug: string }>()
+  const t = useTranslations('events')
   const event = getEventBySlug(slug)
 
   if (!event) {
     return (
       <div className="flex min-h-screen items-center justify-center pt-20">
         <div className="text-center">
-          <h1 className="font-heading text-4xl text-black">Подію не знайдено</h1>
+          <h1 className="font-heading text-4xl text-black">{t('eventNotFound')}</h1>
           <Link href="/events" className="mt-4 inline-block text-wine hover:underline">
-            Повернутися до подій
+            {t('backLink')}
           </Link>
         </div>
       </div>
@@ -36,7 +38,7 @@ export default function EventDetailPage() {
         <div className="mx-auto max-w-4xl px-4 md:px-6">
           <ScrollReveal>
             <div className="flex flex-wrap items-center gap-3">
-              {event.isPast && <Badge>Завершено</Badge>}
+              {event.isPast && <Badge>{t('finished')}</Badge>}
               {event.isFeatured && <Badge variant="wine">Featured</Badge>}
             </div>
 
@@ -60,7 +62,7 @@ export default function EventDetailPage() {
             {/* Program */}
             {event.program && event.program.length > 0 && (
               <div className="mt-10">
-                <h2 className="font-heading text-2xl text-black">Програма</h2>
+                <h2 className="font-heading text-2xl text-black">{t('program')}</h2>
                 <ul className="mt-4 space-y-3">
                   {event.program.map((item, i) => (
                     <li key={i} className="flex items-start gap-3 text-black/70">
@@ -75,7 +77,7 @@ export default function EventDetailPage() {
             {/* Speakers */}
             {event.speakers && event.speakers.length > 0 && (
               <div className="mt-10">
-                <h2 className="font-heading text-2xl text-black">Спікери</h2>
+                <h2 className="font-heading text-2xl text-black">{t('speakers')}</h2>
                 <div className="mt-4 grid gap-6 sm:grid-cols-2">
                   {event.speakers.map((speaker) => (
                     <div key={speaker.name} className="flex items-center gap-4">
@@ -101,21 +103,21 @@ export default function EventDetailPage() {
                   {event.price ? (
                     <p className="text-2xl font-medium text-black">{formatPrice(event.price)}</p>
                   ) : (
-                    <p className="text-lg text-sage">Безкоштовно</p>
+                    <p className="text-lg text-sage">{t('free')}</p>
                   )}
                 </div>
-                <Button size="lg">Купити квиток</Button>
+                <Button size="lg">{t('buyTicket')}</Button>
               </div>
             )}
 
             {/* Gallery */}
             {event.gallery && event.gallery.length > 0 && (
               <div className="mt-10">
-                <h2 className="font-heading text-2xl text-black">Галерея</h2>
+                <h2 className="font-heading text-2xl text-black">{t('gallery')}</h2>
                 <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   {event.gallery.map((img, i) => (
                     <div key={i} className="relative aspect-[4/3] overflow-hidden">
-                      <Image src={img} alt={`${event.title} фото ${i + 1}`} fill className="object-cover" sizes="33vw" />
+                      <Image src={img} alt={`${event.title} ${i + 1}`} fill className="object-cover" sizes="33vw" />
                     </div>
                   ))}
                 </div>
@@ -125,7 +127,7 @@ export default function EventDetailPage() {
 
           <div className="mt-10">
             <Link href="/events" className="text-sm text-wine hover:underline">
-              &larr; Всі події
+              &larr; {t('backToEvents')}
             </Link>
           </div>
         </div>
