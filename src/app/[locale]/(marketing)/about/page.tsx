@@ -33,7 +33,7 @@ export default async function AboutPage() {
         { kicker: 'IV', title: 'Експо', body: 'Формат прямого контакту з аудиторією, пресою й партнерами — у залі, а не на екрані.' },
         { kicker: 'V', title: 'Освіта', body: 'Школи, лекції, воркшопи з beauty, стилю, бізнесу моди — для тих, хто будує наступну індустрію.' },
         { kicker: 'VI', title: 'Міжнародні звʼязки', body: 'Ми будуємо містки між українською сценою та світовими інституціями моди й мистецтва.' },
-        { kicker: 'VII', title: 'Marketplace', body: 'Каталог-вітрина капсул і обмежених накладів — пряме вікно з майстерні до читача.' },
+        { kicker: 'VII', title: 'Маркетплейс', body: 'Каталог-вітрина капсул і обмежених накладів — пряме вікно з майстерні до читача.' },
       ]
     : [
         { kicker: 'I', title: 'A presentation platform', body: 'We open a stage for designers and brands — from established names to those just starting out.' },
