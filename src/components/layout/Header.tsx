@@ -41,7 +41,7 @@ export function Header() {
         <Link href="/" className="fw-logo">
           <span>Fashion West Ukraine</span>
           <span className="ua">
-            {locale === 'ua' ? 'Платформа моди Заходу' : 'Western fashion platform'}
+            {locale === 'ua' ? 'Національна платформа моди України' : 'National fashion platform of Ukraine'}
           </span>
         </Link>
 

@@ -10,9 +10,9 @@ export default async function HeroV2() {
         <div className="kicker">{t('home.manifestoKicker')}</div>
         <h1>
           {locale === 'ua' ? (
-            <>Захід, <em>що вміє</em><br/>шити.</>
+            <>Тут <em>формується</em><br/>контекст.</>
           ) : (
-            <>A west <em>that knows</em><br/>how to tailor.</>
+            <>Where the <em>context</em><br/>is formed.</>
           )}
         </h1>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 24, maxWidth: 480 }}>

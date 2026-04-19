@@ -644,13 +644,27 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .fw-mobile-sheet {
   position: fixed; inset: 0;
   background: var(--bg);
-  z-index: 100;
+  z-index: 200;
   padding: 88px var(--gutter) 32px;
   display: flex; flex-direction: column; justify-content: space-between;
   opacity: 0; pointer-events: none;
   transform: translateY(-12px);
   transition: opacity 280ms ease, transform 280ms ease;
+  overflow-y: auto;
 }
+.fw-mobile-close {
+  position: fixed; top: 20px; right: var(--gutter);
+  width: 32px; height: 32px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: transparent; border: none; padding: 0;
+  cursor: pointer;
+  z-index: 210;
+}
+.fw-mobile-close span {
+  position: absolute; width: 22px; height: 1.5px; background: var(--fg);
+}
+.fw-mobile-close span:first-child { transform: rotate(45deg); }
+.fw-mobile-close span:last-child { transform: rotate(-45deg); }
 .fw-mobile-sheet.open { opacity: 1; pointer-events: auto; transform: none; }
 .fw-mobile-nav { display: flex; flex-direction: column; gap: 4px; }
 .fw-m-link {

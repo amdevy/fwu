@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { useLocale, useTranslations } from 'next-intl'
 import { Link, usePathname, useRouter } from '@/i18n/navigation'
 
@@ -10,6 +11,11 @@ export function MobileMenu() {
   const pathname = usePathname()
   const router = useRouter()
   const [open, setOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
@@ -48,27 +54,37 @@ export function MobileMenu() {
         <span className={`bar${open ? ' x2' : ''}`} />
       </button>
 
-      <div className={`fw-mobile-sheet${open ? ' open' : ''}`} role="dialog" aria-modal="true">
-        <nav className="fw-mobile-nav">
-          {items.map(([href, label]) => (
-            <Link
-              key={href}
-              href={href}
-              className={`fw-m-link${pathname === href || pathname.startsWith(href + '/') ? ' active' : ''}`}
-              onClick={() => setOpen(false)}
-            >
-              {label}
-            </Link>
-          ))}
-        </nav>
-        <div className="fw-mobile-foot">
-          <div className="lang-toggle">
-            <button className={locale === 'ua' ? 'on' : ''} onClick={() => switchLang('ua')}>UA</button>
-            <button className={locale === 'en' ? 'on' : ''} onClick={() => switchLang('en')}>EN</button>
+      {mounted && createPortal(
+        <div className={`fw-mobile-sheet${open ? ' open' : ''}`} role="dialog" aria-modal="true">
+          <button
+            className="fw-mobile-close"
+            aria-label="Close menu"
+            onClick={() => setOpen(false)}
+          >
+            <span /><span />
+          </button>
+          <nav className="fw-mobile-nav">
+            {items.map(([href, label]) => (
+              <Link
+                key={href}
+                href={href}
+                className={`fw-m-link${pathname === href || pathname.startsWith(href + '/') ? ' active' : ''}`}
+                onClick={() => setOpen(false)}
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
+          <div className="fw-mobile-foot">
+            <div className="lang-toggle">
+              <button className={locale === 'ua' ? 'on' : ''} onClick={() => switchLang('ua')}>UA</button>
+              <button className={locale === 'en' ? 'on' : ''} onClick={() => switchLang('en')}>EN</button>
+            </div>
+            <a href="mailto:contact@fashionwest.ua" className="fw-m-mail">contact@fashionwest.ua</a>
           </div>
-          <a href="mailto:contact@fashionwest.ua" className="fw-m-mail">contact@fashionwest.ua</a>
-        </div>
-      </div>
+        </div>,
+        document.body,
+      )}
     </>
   )
 }

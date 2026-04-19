@@ -6,7 +6,7 @@ export const designers: Designer[] = [
     slug: 'oleh-petrenko',
     name: { ua: 'Олег Петренко', en: 'Oleh Petrenko' },
     brand: 'HORA',
-    city: { ua: 'Ужгород', en: 'Uzhhorod' },
+    city: { ua: 'Київ', en: 'Kyiv' },
     founded: 2019,
     discipline: { ua: 'Вечірній одяг, костюм', en: 'Evening wear, tailoring' },
     portrait: 'https://images.unsplash.com/photo-1618886614638-80e3c103d31a?w=1200&q=80',
@@ -27,8 +27,8 @@ export const designers: Designer[] = [
       { year: 2024, ua: 'Перший показ на Kyiv Fashion Week.', en: 'Debut at Kyiv Fashion Week.' },
     ],
     quote: {
-      ua: 'Закарпаття — це не орнамент. Це світло, туман і вага вовни в руках.',
-      en: 'Transcarpathia is not ornament. It is light, fog, and the weight of wool in your hands.',
+      ua: 'Костюм — це коли тиша вміє стояти.',
+      en: 'Tailoring is silence that knows how to stand.',
     },
   },
   {
@@ -47,8 +47,8 @@ export const designers: Designer[] = [
       'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=1200&q=80',
     ],
     lede: {
-      ua: 'Ірина переосмислює закарпатський трикотаж. Овеча вовна з Рахова, фарбована корою горіха — одяг, який пахне лісом.',
-      en: 'Iryna reimagines Transcarpathian knitwear. Raw wool from Rakhiv, dyed with walnut bark — garments that smell of forest.',
+      ua: 'Ірина переосмислює український трикотаж. Овеча вовна, фарбована корою горіха — одяг, який пахне лісом.',
+      en: 'Iryna reimagines Ukrainian knitwear. Raw wool, dyed with walnut bark — garments that smell of forest.',
     },
     timeline: [
       { year: 2016, ua: 'КНУТД, факультет моделювання.', en: 'KNUTD, fashion design faculty.' },
@@ -66,7 +66,7 @@ export const designers: Designer[] = [
     slug: 'anna-hutsul',
     name: { ua: 'Анна Гуцул', en: 'Anna Hutsul' },
     brand: 'BILA',
-    city: { ua: 'Ужгород', en: 'Uzhhorod' },
+    city: { ua: 'Одеса', en: 'Odesa' },
     founded: 2020,
     discipline: { ua: 'Льон, мінімалізм', en: 'Linen, minimalism' },
     portrait: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=1200&q=80',
@@ -82,7 +82,7 @@ export const designers: Designer[] = [
     },
     timeline: [
       { year: 2015, ua: 'Архітектурний факультет, Харків.', en: 'Architecture faculty, Kharkiv.' },
-      { year: 2019, ua: 'Переїзд до Ужгорода.', en: 'Relocation to Uzhhorod.' },
+      { year: 2019, ua: 'Переїзд до Одеси.', en: 'Relocation to Odesa.' },
       { year: 2020, ua: 'Перша колекція з 8 речей, всі білі.', en: 'First collection of 8 pieces, all white.' },
     ],
     quote: {
@@ -95,7 +95,7 @@ export const designers: Designer[] = [
     slug: 'marko-berehy',
     name: { ua: 'Марко Береги', en: 'Marko Berehy' },
     brand: 'BEREHY',
-    city: { ua: 'Берегове', en: 'Berehove' },
+    city: { ua: 'Львів', en: 'Lviv' },
     founded: 2018,
     discipline: { ua: 'Шкіра, аксесуари', en: 'Leather, accessories' },
     portrait: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&q=80',
@@ -110,7 +110,7 @@ export const designers: Designer[] = [
     },
     timeline: [
       { year: 2012, ua: 'Навчання у майстра шкіри у Флоренції.', en: 'Apprenticeship with a leather master in Florence.' },
-      { year: 2018, ua: 'Відкрив майстерню в Береговому.', en: 'Opened a workshop in Berehove.' },
+      { year: 2018, ua: 'Відкрив майстерню у Львові.', en: 'Opened a workshop in Lviv.' },
     ],
     quote: {
       ua: "Шкіра пам'ятає руку. Добре пошита річ — це автопортрет.",
@@ -122,7 +122,7 @@ export const designers: Designer[] = [
     slug: 'sofia-verhovyna',
     name: { ua: 'Софія Верховина', en: 'Sofiia Verkhovyna' },
     brand: 'VRKH',
-    city: { ua: 'Рахів', en: 'Rakhiv' },
+    city: { ua: 'Харків', en: 'Kharkiv' },
     founded: 2022,
     discipline: { ua: 'Концептуальний одяг', en: 'Conceptual clothing' },
     portrait: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=1200&q=80',
@@ -142,7 +142,7 @@ export const designers: Designer[] = [
     slug: 'yulia-dub',
     name: { ua: 'Юлія Дуб', en: 'Yuliia Dub' },
     brand: 'DUB atelier',
-    city: { ua: 'Ужгород', en: 'Uzhhorod' },
+    city: { ua: 'Дніпро', en: 'Dnipro' },
     founded: 2017,
     discipline: { ua: 'Весільний та couture', en: 'Bridal and couture' },
     portrait: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1200&q=80',

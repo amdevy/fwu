@@ -22,20 +22,20 @@ export default async function PartnersPage() {
 
   const partners = ua
     ? [
-        { kind: 'Шоурум', name: 'Atelier 25, Львів', note: 'Постійна вітрина капсул FW' },
-        { kind: 'Музей', name: 'Музей народної архітектури', note: 'Колаборації, архів тканин' },
-        { kind: 'Видання', name: 'BLOK Magazine', note: 'Редакційні зйомки, інтервʼю' },
-        { kind: 'Ательє', name: 'Шкіряна майстерня BEREHY', note: 'Виробничий партнер' },
-        { kind: 'Освіта', name: 'ЛНАМ', note: 'Стажування студентів' },
-        { kind: 'Логістика', name: 'Нова Пошта Преміум', note: 'Доставка по Україні' },
+        { kind: 'Бренд', name: 'LAUD', note: 'Індустрійний партнер платформи' },
+        { kind: 'Освіта', name: 'Julia Rizak Makeup School', note: 'Beauty-партнер показів' },
+        { kind: 'Медіа', name: 'FASHIONREALITY', note: 'Інформаційний партнер' },
+        { kind: 'Видання', name: 'Vogue Ukraine', note: 'Медіа-партнер' },
+        { kind: 'Локація', name: "Darlin Restobar, Мукачево", note: 'Майданчик FWU 2026' },
+        { kind: 'Логістика', name: 'Нова Пошта', note: 'Доставка по Україні' },
       ]
     : [
-        { kind: 'Showroom', name: 'Atelier 25, Lviv', note: 'Permanent FW capsule window' },
-        { kind: 'Museum', name: 'Open-Air Museum of Folk Architecture', note: 'Collaborations, textile archive' },
-        { kind: 'Publication', name: 'BLOK Magazine', note: 'Editorial shoots, interviews' },
-        { kind: 'Atelier', name: 'BEREHY leather workshop', note: 'Production partner' },
-        { kind: 'Education', name: 'Lviv National Academy of Arts', note: 'Student internships' },
-        { kind: 'Logistics', name: 'Nova Poshta Premium', note: 'Ukraine delivery' },
+        { kind: 'Brand', name: 'LAUD', note: 'Industry partner of the platform' },
+        { kind: 'Education', name: 'Julia Rizak Makeup School', note: 'Runway beauty partner' },
+        { kind: 'Media', name: 'FASHIONREALITY', note: 'Information partner' },
+        { kind: 'Publication', name: 'Vogue Ukraine', note: 'Media partner' },
+        { kind: 'Venue', name: 'Darlin Restobar, Mukachevo', note: 'Host venue of FWU 2026' },
+        { kind: 'Logistics', name: 'Nova Poshta', note: 'Ukraine delivery' },
       ]
 
   return (

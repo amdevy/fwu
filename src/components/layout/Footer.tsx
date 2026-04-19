@@ -54,10 +54,8 @@ export async function Footer() {
         <div>
           <h4>{ua ? 'Слідкувати' : 'Follow'}</h4>
           <ul>
-            <li><span>Instagram</span></li>
-            <li><span>Telegram</span></li>
-            <li><span>YouTube</span></li>
-            <li><span>Pinterest</span></li>
+            <li><a href="https://www.instagram.com/fw.ukraine" target="_blank" rel="noreferrer">Instagram</a></li>
+            <li><a href="https://t.me/fashionwestukraine2025" target="_blank" rel="noreferrer">Telegram</a></li>
           </ul>
         </div>
       </div>
