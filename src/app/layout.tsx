@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Bodoni_Moda, Inter } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 const bodoni = Bodoni_Moda({
@@ -80,6 +81,7 @@ export default function RootLayout({
           </>
         )}
         {children}
+        <Analytics />
       </body>
     </html>
   )
