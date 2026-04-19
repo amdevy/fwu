@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Bodoni_Moda, DM_Sans } from 'next/font/google'
+import { Bodoni_Moda, Inter } from 'next/font/google'
 import './globals.css'
 
 const bodoni = Bodoni_Moda({
@@ -8,37 +8,58 @@ const bodoni = Bodoni_Moda({
   display: 'swap',
 })
 
-const dmSans = DM_Sans({
-  subsets: ['latin', 'latin-ext'],
+const inter = Inter({
+  subsets: ['latin', 'latin-ext', 'cyrillic', 'cyrillic-ext'],
   variable: '--font-body',
   display: 'swap',
 })
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://fashionwestukraine.com'
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: 'FWU Platform — Fashion West Ukraine',
-    template: '%s | FWU Platform',
+    default: 'Fashion West Ukraine — елітна fashion-платформа Закарпаття',
+    template: '%s | Fashion West Ukraine',
   },
   description:
-    'Платформа моди, бізнесу та культури Закарпаття. Agency, Models, Events, Education, Culture.',
+    'Fashion West Ukraine — елітний шоурум і fashion-платформа Закарпаття: українські дизайнери, закриті колекції, події, партнери. Ужгород, Львів, Україна.',
   keywords: [
-    'FWU', 'Fashion West Ukraine', 'мода', 'Закарпаття', 'Ужгород',
-    'дизайнери', 'модельний бізнес', 'fashion platform',
+    'Fashion West Ukraine',
+    'Fashion West',
+    'українські дизайнери',
+    'дизайнерський одяг Україна',
+    'мода Закарпаття',
+    'модний показ Ужгород',
+    'elite fashion Ukraine',
+    'купити українські бренди одягу',
   ],
   openGraph: {
     type: 'website',
     locale: 'uk_UA',
-    siteName: 'FWU Platform',
-    title: 'FWU Platform — Fashion West Ukraine',
-    description: 'Платформа моди, бізнесу та культури Закарпаття.',
+    url: SITE_URL,
+    siteName: 'Fashion West Ukraine',
+    title: 'Fashion West Ukraine — елітна fashion-платформа Закарпаття',
+    description:
+      'Українські дизайнери, закриті колекції з показів, події та партнери. Елітний шоурум і платформа Закарпаття.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'FWU Platform — Fashion West Ukraine',
-    description: 'Платформа моди, бізнесу та культури Закарпаття.',
+    title: 'Fashion West Ukraine',
+    description:
+      'Елітна fashion-платформа Закарпаття: дизайнери, колекції, події.',
   },
   robots: { index: true, follow: true },
+  alternates: {
+    canonical: '/',
+    languages: {
+      'uk-UA': '/ua',
+      'en-US': '/en',
+    },
+  },
 }
+
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID
 
 export default function RootLayout({
   children,
@@ -46,8 +67,18 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html className={`${bodoni.variable} ${dmSans.variable}`} suppressHydrationWarning>
-      <body className="min-h-screen bg-off-white font-body text-black antialiased">
+    <html className={`${bodoni.variable} ${inter.variable}`} suppressHydrationWarning>
+      <body suppressHydrationWarning>
+        {GA_ID && (
+          <>
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}');`,
+              }}
+            />
+          </>
+        )}
         {children}
       </body>
     </html>
