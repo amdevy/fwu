@@ -1,89 +1,73 @@
 'use client'
 
-import { Link } from '@/i18n/navigation'
-import { useState, useEffect } from 'react'
-import { Menu } from 'lucide-react'
-import { useTranslations } from 'next-intl'
-import { cn } from '@/lib/utils'
-import { Navigation } from './Navigation'
+import { useLocale, useTranslations } from 'next-intl'
+import { Link, usePathname, useRouter } from '@/i18n/navigation'
+import { useCart } from '@/components/providers/CartProvider'
 import { MobileMenu } from './MobileMenu'
-import { LanguageSwitcher } from './LanguageSwitcher'
 
-interface HeaderProps {
-  transparent?: boolean
-}
+export function Header() {
+  const t = useTranslations()
+  const locale = useLocale()
+  const pathname = usePathname()
+  const router = useRouter()
+  const { cartCount } = useCart()
 
-export function Header({ transparent = false }: HeaderProps) {
-  const t = useTranslations('nav')
-  const [scrolled, setScrolled] = useState(false)
-  const [mobileOpen, setMobileOpen] = useState(false)
+  const isActive = (href: string) =>
+    href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(href + '/')
 
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50)
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  const link = (href: string, label: string, muted = false) => (
+    <Link
+      href={href}
+      className={`fw-nav-link${muted ? ' muted' : ''}${isActive(href) ? ' active' : ''}`}
+    >
+      {label}
+    </Link>
+  )
 
-  const isTransparent = transparent && !scrolled
+  const switchLang = (next: 'ua' | 'en') => {
+    if (next === locale) return
+    router.replace(pathname, { locale: next })
+  }
 
   return (
-    <>
-      <header
-        className={cn(
-          'fixed top-0 left-0 right-0 z-40 transition-all duration-300',
-          isTransparent
-            ? 'bg-transparent'
-            : 'bg-off-white/90 backdrop-blur-md shadow-sm'
-        )}
-      >
-        <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-6 md:h-20 lg:px-10">
-          {/* Logo */}
-          <Link href="/" className="flex-shrink-0">
-            <span className={cn(
-              'font-heading text-base uppercase tracking-[0.2em] transition-colors',
-              isTransparent ? 'text-off-white' : 'text-wine'
-            )}>
-              Fashion West
-            </span>
-          </Link>
+    <nav className="fw-nav">
+      <div className="fw-nav-inner">
+        <div className="fw-nav-left">
+          {link('/designers', t('nav.designers'))}
+          {link('/catalog', t('nav.catalog'))}
+          {link('/about', t('nav.about'), true)}
+        </div>
 
-          {/* Center nav */}
-          <Navigation isTransparent={isTransparent} />
+        <Link href="/" className="fw-logo">
+          <span>Fashion West Ukraine</span>
+          <span className="ua">
+            {locale === 'ua' ? 'Національна платформа моди України' : 'National fashion platform of Ukraine'}
+          </span>
+        </Link>
 
-          {/* Right side */}
-          <div className="flex items-center gap-3">
-            <div className="hidden lg:block">
-              <LanguageSwitcher variant={isTransparent ? 'light' : 'dark'} />
-            </div>
-
-            <Link href="/contacts" className="hidden lg:block">
-              <span
-                className={cn(
-                  'inline-block px-6 py-2.5 text-xs font-medium tracking-widest uppercase transition-colors',
-                  isTransparent
-                    ? 'bg-wine text-white hover:bg-wine-dark'
-                    : 'bg-wine text-white hover:bg-wine-dark'
-                )}
-              >
-                {t('joinPlatform')}
-              </span>
-            </Link>
-
-            <button
-              onClick={() => setMobileOpen(true)}
-              className={cn(
-                'p-2 lg:hidden',
-                isTransparent ? 'text-white' : 'text-black'
-              )}
-              aria-label={t('openMenu')}
-            >
-              <Menu className="h-6 w-6" />
+        <div className="fw-nav-right">
+          {link('/partners', t('nav.partners'), true)}
+          {link('/contacts', t('nav.contacts'), true)}
+          <div className="lang-toggle">
+            <button className={locale === 'ua' ? 'on' : ''} onClick={() => switchLang('ua')}>
+              UA
+            </button>
+            <button className={locale === 'en' ? 'on' : ''} onClick={() => switchLang('en')}>
+              EN
             </button>
           </div>
+          <Link href="/cart" className="fw-nav-link fw-cart-badge">
+            {t('nav.cart')}
+            {cartCount > 0 && <span className="count">{cartCount}</span>}
+          </Link>
         </div>
-      </header>
 
-      <MobileMenu isOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
-    </>
+        <Link href="/cart" className="fw-nav-link fw-cart-badge fw-cart-mobile">
+          {t('nav.cart')}
+          {cartCount > 0 && <span className="count">{cartCount}</span>}
+        </Link>
+        <MobileMenu />
+      </div>
+    </nav>
   )
 }
