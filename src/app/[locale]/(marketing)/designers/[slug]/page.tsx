@@ -3,7 +3,6 @@ import { notFound } from 'next/navigation'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
 import { designers, getDesigner, getProductsByDesigner } from '@/lib/data/seed'
-import { fmtPrice } from '@/lib/format/currency'
 import type { Locale } from '@/lib/types'
 import { altsFor } from '@/lib/seo'
 
@@ -33,6 +32,7 @@ export default async function DossierPage({ params }: { params: Promise<{ slug: 
   if (!designer) notFound()
   const t = await getTranslations()
   const locale = (await getLocale()) as Locale
+  const ua = locale === 'ua'
   const idx = designers.findIndex((d) => d.id === designer.id)
   const prev = designers[(idx - 1 + designers.length) % designers.length]
   const next = designers[(idx + 1) % designers.length]
@@ -47,6 +47,19 @@ export default async function DossierPage({ params }: { params: Promise<{ slug: 
     address: { '@type': 'PostalAddress', addressLocality: designer.city[locale], addressCountry: 'UA' },
     brand: { '@type': 'Brand', name: designer.brand, foundingDate: String(designer.founded) },
   }
+
+  const igHandle = designer.brand.toLowerCase().replace(/[^a-z0-9]+/g, '')
+  const collabSubject = encodeURIComponent(`FWU Collaboration · ${designer.brand}`)
+
+  const showsHistory = ua
+    ? [
+        { year: 'FWU 2026', note: 'Spring Showcase, Мукачево' },
+        { year: 'FWU 2025', note: 'Capsule presentation, Закарпаття' },
+      ]
+    : [
+        { year: 'FWU 2026', note: 'Spring Showcase, Mukachevo' },
+        { year: 'FWU 2025', note: 'Capsule presentation, Transcarpathia' },
+      ]
 
   return (
     <article className="fade-in">
@@ -66,23 +79,33 @@ export default async function DossierPage({ params }: { params: Promise<{ slug: 
 
       <div className="dossier-body">
         <aside className="dx-sidebar">
-          <div className="kicker" style={{ marginBottom: 16 }}>{locale === 'ua' ? 'Досьє' : 'Dossier'}</div>
+          <div className="kicker" style={{ marginBottom: 16 }}>{ua ? 'Досьє' : 'Dossier'}</div>
           <dl>
-            <dt>{locale === 'ua' ? 'Бренд' : 'Brand'}</dt><dd>{designer.brand}</dd>
-            <dt>{locale === 'ua' ? 'Місто' : 'City'}</dt><dd>{designer.city[locale]}</dd>
-            <dt>{locale === 'ua' ? 'Засновано' : 'Founded'}</dt><dd>{designer.founded}</dd>
-            <dt>{locale === 'ua' ? 'Напрям' : 'Discipline'}</dt><dd>{designer.discipline[locale]}</dd>
+            <dt>{ua ? 'Бренд' : 'Brand'}</dt><dd>{designer.brand}</dd>
+            <dt>{ua ? 'Місто' : 'City'}</dt><dd>{designer.city[locale]}</dd>
+            <dt>{ua ? 'Засновано' : 'Founded'}</dt><dd>{designer.founded}</dd>
+            <dt>{ua ? 'Напрям' : 'Discipline'}</dt><dd>{designer.discipline[locale]}</dd>
           </dl>
+          <div className="kicker" style={{ marginTop: 32, marginBottom: 12 }}>{t('designers.social')}</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            <a href={`https://instagram.com/${igHandle}`} target="_blank" rel="noreferrer" style={{ fontSize: 14 }}>Instagram ↗</a>
+            <a href={`mailto:hello@${igHandle}.studio`} style={{ fontSize: 14 }}>Email ↗</a>
+          </div>
         </aside>
         <div>
           <p className="lede">{designer.lede[locale]}</p>
+
+          <div className="kicker" style={{ marginTop: 48, marginBottom: 12 }}>{t('designers.philosophy')}</div>
+          <p style={{ fontSize: 17, lineHeight: 1.7, color: 'var(--fg-muted)' }}>
+            &ldquo;{designer.quote[locale]}&rdquo;
+          </p>
         </div>
       </div>
 
       {designer.timeline.length > 0 && (
         <div className="timeline">
           <div style={{ padding: '24px 0 8px' }}>
-            <div className="kicker">{locale === 'ua' ? 'Хронологія' : 'Timeline'}</div>
+            <div className="kicker">{ua ? 'Хронологія бренду' : 'Brand timeline'}</div>
           </div>
           {designer.timeline.map((row, i) => (
             <div key={i} className="timeline-row">
@@ -93,9 +116,16 @@ export default async function DossierPage({ params }: { params: Promise<{ slug: 
         </div>
       )}
 
-      <div className="pullquote">
-        <blockquote>&ldquo;{designer.quote[locale]}&rdquo;</blockquote>
-        <cite>— {designer.name[locale]}, {designer.brand}</cite>
+      <div className="timeline">
+        <div style={{ padding: '24px 0 8px' }}>
+          <div className="kicker">{t('designers.shows')}</div>
+        </div>
+        {showsHistory.map((row, i) => (
+          <div key={i} className="timeline-row">
+            <div className="yr">{row.year}</div>
+            <div style={{ fontSize: 17, maxWidth: 720 }}>{row.note}</div>
+          </div>
+        ))}
       </div>
 
       <div className="gal-grid">
@@ -109,9 +139,9 @@ export default async function DossierPage({ params }: { params: Promise<{ slug: 
       {designerProducts.length > 0 && (
         <>
           <div className="sec-head">
-            <div className="sh-num">{locale === 'ua' ? 'У каталозі' : 'In catalog'}</div>
+            <div className="sh-num">{t('designers.collections')}</div>
             <h2 className="sh-title">{designer.brand}</h2>
-            <div className="sh-sub">{designerProducts.length} {locale === 'ua' ? 'речей' : 'pieces'}</div>
+            <div className="sh-sub">{designerProducts.length} {ua ? 'позицій' : 'pieces'}</div>
           </div>
           <div className="grid-4">
             {designerProducts.map((p) => (
@@ -122,13 +152,30 @@ export default async function DossierPage({ params }: { params: Promise<{ slug: 
                 </div>
                 <div className="card-meta">
                   <h3 className="card-title" style={{ fontSize: 18 }}>{p.title[locale]}</h3>
-                  <div className="card-price">{fmtPrice(p.price)}</div>
+                  <div className="card-sub">{p.category[locale]}</div>
                 </div>
               </Link>
             ))}
           </div>
         </>
       )}
+
+      <div style={{ padding: '96px var(--gutter)', textAlign: 'center', borderTop: '1px solid var(--rule)' }}>
+        <div className="kicker" style={{ marginBottom: 12 }}>{t('designers.collaborate')}</div>
+        <p style={{ color: 'var(--fg-muted)', maxWidth: 560, margin: '0 auto 24px', lineHeight: 1.6 }}>
+          {ua
+            ? 'Запит на співпрацю з брендом — через платформу FWU.'
+            : 'Request a collaboration with the brand via the FWU platform.'}
+        </p>
+        <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
+          <a href={`mailto:partners@fashionwest.ua?subject=${collabSubject}`} className="hairline-btn solid">
+            {t('designers.collaborate')} →
+          </a>
+          <Link href="/collaboration" className="hairline-btn">
+            {t('collab.formTitle')} →
+          </Link>
+        </div>
+      </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', borderTop: '1px solid var(--fg)', margin: '0 var(--gutter) 96px' }}>
         <Link href={`/designers/${prev.slug}`} style={{ padding: '32px 0', borderRight: '1px solid var(--rule)', paddingRight: 32 }}>

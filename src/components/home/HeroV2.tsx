@@ -32,7 +32,7 @@ export default async function HeroV2() {
           </p>
           <div className="hv2-rise" style={{ display: 'flex', gap: 12, animationDelay: '680ms' }}>
             <Link href="/designers" className="hairline-btn solid">{t('home.enter')}</Link>
-            <Link href="/catalog" className="hairline-btn">{t('common.toCatalog')}</Link>
+            <Link href="/pop-up" className="hairline-btn">{t('common.toPopup')}</Link>
           </div>
         </div>
       </div>

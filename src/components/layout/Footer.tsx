@@ -38,17 +38,18 @@ export async function Footer() {
           <ul>
             <li><Link href="/about">{t('nav.about')}</Link></li>
             <li><Link href="/designers">{t('nav.designers')}</Link></li>
-            <li><Link href="/catalog">{t('nav.catalog')}</Link></li>
+            <li><Link href="/pop-up">{t('nav.popup')}</Link></li>
+            <li><Link href="/projects">{t('nav.projects')}</Link></li>
             <li><Link href="/partners">{t('nav.partners')}</Link></li>
           </ul>
         </div>
         <div>
-          <h4>{ua ? 'Сервіс' : 'Service'}</h4>
+          <h4>{ua ? 'Співпраця' : 'Engage'}</h4>
           <ul>
-            <li><Link href="/cart">{t('nav.cart')}</Link></li>
-            <li><span>{ua ? 'Доставка' : 'Shipping'}</span></li>
-            <li><span>{ua ? 'Повернення' : 'Returns'}</span></li>
-            <li><span>FAQ</span></li>
+            <li><Link href="/collaboration">{t('nav.collaboration')}</Link></li>
+            <li><Link href="/contacts">{t('nav.contacts')}</Link></li>
+            <li><a href="mailto:partners@fashionwest.ua">partners@fashionwest.ua</a></li>
+            <li><a href="mailto:popup@fashionwest.ua">popup@fashionwest.ua</a></li>
           </ul>
         </div>
         <div>

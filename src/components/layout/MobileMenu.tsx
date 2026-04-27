@@ -35,10 +35,11 @@ export function MobileMenu() {
 
   const items: Array<[string, string]> = [
     ['/designers', t('nav.designers')],
-    ['/catalog', t('nav.catalog')],
+    ['/pop-up', t('nav.popup')],
+    ['/projects', t('nav.projects')],
     ['/about', t('nav.about')],
     ['/partners', t('nav.partners')],
-    ['/offers', t('nav.offers')],
+    ['/collaboration', t('nav.collaboration')],
     ['/contacts', t('nav.contacts')],
   ]
 

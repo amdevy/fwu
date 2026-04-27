@@ -1,7 +1,6 @@
 import { getLocale, getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
 import { designers, products } from '@/lib/data/seed'
-import { fmtPrice } from '@/lib/format/currency'
 import type { Locale } from '@/lib/types'
 
 export default async function LatestEdition() {
@@ -26,17 +25,17 @@ export default async function LatestEdition() {
               </div>
               <div className="card-meta">
                 <div>
+                  <div className="kicker" style={{ marginBottom: 4 }}>{designer?.brand}</div>
                   <h3 className="card-title" style={{ fontSize: 18 }}>{p.title[locale]}</h3>
-                  <div className="card-sub">{designer?.brand}</div>
+                  <div className="card-sub">{p.category[locale]}</div>
                 </div>
-                <div className="card-price">{fmtPrice(p.price)}</div>
               </div>
             </Link>
           )
         })}
       </div>
       <div style={{ padding: '0 var(--gutter) 96px', display: 'flex', justifyContent: 'center' }}>
-        <Link href="/catalog" className="hairline-btn">{t('common.toCatalog')}</Link>
+        <Link href="/pop-up" className="hairline-btn">{t('common.toPopup')}</Link>
       </div>
     </section>
   )

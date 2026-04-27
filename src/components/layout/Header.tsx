@@ -2,7 +2,6 @@
 
 import { useLocale, useTranslations } from 'next-intl'
 import { Link, usePathname, useRouter } from '@/i18n/navigation'
-import { useCart } from '@/components/providers/CartProvider'
 import { MobileMenu } from './MobileMenu'
 
 export function Header() {
@@ -10,7 +9,6 @@ export function Header() {
   const locale = useLocale()
   const pathname = usePathname()
   const router = useRouter()
-  const { cartCount } = useCart()
 
   const isActive = (href: string) =>
     href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(href + '/')
@@ -34,19 +32,21 @@ export function Header() {
       <div className="fw-nav-inner">
         <div className="fw-nav-left">
           {link('/designers', t('nav.designers'))}
-          {link('/catalog', t('nav.catalog'))}
+          {link('/pop-up', t('nav.popup'))}
+          {link('/projects', t('nav.projects'), true)}
           {link('/about', t('nav.about'), true)}
         </div>
 
         <Link href="/" className="fw-logo">
           <span>Fashion West Ukraine</span>
           <span className="ua">
-            {locale === 'ua' ? 'Національна платформа моди України' : 'National fashion platform of Ukraine'}
+            {locale === 'ua' ? 'Національна fashion-платформа нового покоління' : 'A national next-generation fashion platform'}
           </span>
         </Link>
 
         <div className="fw-nav-right">
           {link('/partners', t('nav.partners'), true)}
+          {link('/collaboration', t('nav.collaboration'))}
           {link('/contacts', t('nav.contacts'), true)}
           <div className="lang-toggle">
             <button className={locale === 'ua' ? 'on' : ''} onClick={() => switchLang('ua')}>
@@ -56,16 +56,8 @@ export function Header() {
               EN
             </button>
           </div>
-          <Link href="/cart" className="fw-nav-link fw-cart-badge">
-            {t('nav.cart')}
-            {cartCount > 0 && <span className="count">{cartCount}</span>}
-          </Link>
         </div>
 
-        <Link href="/cart" className="fw-nav-link fw-cart-badge fw-cart-mobile">
-          {t('nav.cart')}
-          {cartCount > 0 && <span className="count">{cartCount}</span>}
-        </Link>
         <MobileMenu />
       </div>
     </nav>

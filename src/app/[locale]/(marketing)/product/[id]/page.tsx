@@ -51,12 +51,6 @@ export default async function ProductPage({
     image: product.images,
     description: `${product.category[loc]} · ${product.material[loc]}`,
     brand: { '@type': 'Brand', name: designer.brand },
-    offers: {
-      '@type': 'Offer',
-      priceCurrency: 'UAH',
-      price: product.price,
-      availability: 'https://schema.org/InStock',
-    },
   }
 
   return (
