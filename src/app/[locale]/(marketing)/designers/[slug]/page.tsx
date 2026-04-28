@@ -49,7 +49,6 @@ export default async function DossierPage({ params }: { params: Promise<{ slug: 
   }
 
   const igHandle = designer.brand.toLowerCase().replace(/[^a-z0-9]+/g, '')
-  const collabSubject = encodeURIComponent(`FWU Collaboration · ${designer.brand}`)
 
   const showsHistory = ua
     ? [
@@ -88,8 +87,8 @@ export default async function DossierPage({ params }: { params: Promise<{ slug: 
           </dl>
           <div className="kicker" style={{ marginTop: 32, marginBottom: 12 }}>{t('designers.social')}</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            <a href={`https://instagram.com/${igHandle}`} target="_blank" rel="noreferrer" style={{ fontSize: 14 }}>Instagram ↗</a>
-            <a href={`mailto:hello@${igHandle}.studio`} style={{ fontSize: 14 }}>Email ↗</a>
+            <a href={`https://instagram.com/${igHandle}`} target="_blank" rel="noreferrer" style={{ fontSize: 14 }}>@{igHandle} ↗</a>
+            <a href="https://www.instagram.com/fw.cooperation" target="_blank" rel="noreferrer" style={{ fontSize: 14 }}>{t('designers.collaborate')} ↗</a>
           </div>
         </aside>
         <div>
@@ -168,12 +167,12 @@ export default async function DossierPage({ params }: { params: Promise<{ slug: 
             : 'Request a collaboration with the brand via the FWU platform.'}
         </p>
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <a href={`mailto:partners@fashionwest.ua?subject=${collabSubject}`} className="hairline-btn solid">
-            {t('designers.collaborate')} →
+          <a href="https://www.instagram.com/fw.cooperation" target="_blank" rel="noreferrer" className="hairline-btn solid">
+            Instagram · @fw.cooperation →
           </a>
-          <Link href="/collaboration" className="hairline-btn">
-            {t('collab.formTitle')} →
-          </Link>
+          <a href={`https://www.instagram.com/${igHandle}`} target="_blank" rel="noreferrer" className="hairline-btn">
+            {designer.brand} →
+          </a>
         </div>
       </div>
 

@@ -23,8 +23,7 @@ export default function ProductView({ product, designer, locale }: Props) {
     shipping: t('product.shippingBody'),
   }
 
-  const subject = encodeURIComponent(`FWU Pop-Up · ${product.num} · ${product.title[locale]} · ${designer.brand}`)
-  const mailto = `mailto:popup@fashionwest.ua?subject=${subject}`
+  const inquireHref = 'https://www.instagram.com/fw.cooperation'
 
   return (
     <article className="fade-in">
@@ -71,11 +70,13 @@ export default function ProductView({ product, designer, locale }: Props) {
           </p>
 
           <a
-            href={mailto}
+            href={inquireHref}
+            target="_blank"
+            rel="noreferrer"
             className="hairline-btn solid"
             style={{ padding: '18px 24px', justifyContent: 'center' }}
           >
-            {t('common.requestPiece')} →
+            {t('common.requestPiece')} → Instagram
           </a>
 
           {(['details', 'material', 'shipping'] as AccKey[]).map((k) => {

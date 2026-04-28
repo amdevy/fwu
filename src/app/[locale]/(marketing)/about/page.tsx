@@ -47,7 +47,7 @@ export default async function AboutPage() {
         { kicker: 'IV', title: 'Експо', body: 'Формат прямого контакту з аудиторією, пресою й партнерами — у залі, а не на екрані.' },
         { kicker: 'V', title: 'Освіта', body: 'Школи, лекції, воркшопи з beauty, стилю, бізнесу моди — для тих, хто будує наступну індустрію.' },
         { kicker: 'VI', title: 'Міжнародні звʼязки', body: 'Ми будуємо містки між українською сценою та світовими інституціями моди й мистецтва.' },
-        { kicker: 'VII', title: 'Pop-Up Selection', body: 'Curated простір selected fashion pieces: limited drops, runway pieces, capsule collections, editor’s choice.' },
+        { kicker: 'VII', title: 'Pop-Up Selection', body: 'Curated-простір відібраних речей: обмежені дропи, речі з показів, капсульні колекції та редакційна добірка.' },
       ]
     : [
         { kicker: 'I', title: 'A presentation platform', body: 'A stage for designers and brands — from established names to those just starting out.' },

@@ -81,8 +81,8 @@ export default async function PopupPage() {
       <div className="popup-inquire">
         <div className="display popup-inquire-h">{t('popup.inquire')}</div>
         <p>{t('popup.inquireBody')}</p>
-        <a href="mailto:popup@fashionwest.ua?subject=FWU%20Pop-Up%20Inquiry" className="hairline-btn solid">
-          popup@fashionwest.ua →
+        <a href="https://www.instagram.com/fw.cooperation" target="_blank" rel="noreferrer" className="hairline-btn solid">
+          Instagram · @fw.cooperation →
         </a>
       </div>
     </section>

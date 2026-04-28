@@ -99,7 +99,7 @@ export default async function PartnersPage() {
             : 'If you are a showroom, publication, institution or production partner, write to us. We are open to collaborations.'}
         </p>
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <a href="mailto:partners@fashionwest.ua" className="hairline-btn solid">partners@fashionwest.ua →</a>
+          <a href="https://www.instagram.com/fw.cooperation" target="_blank" rel="noreferrer" className="hairline-btn solid">Instagram · @fw.cooperation →</a>
           <Link href="/collaboration" className="hairline-btn">{t('common.collaborate')} →</Link>
         </div>
       </div>

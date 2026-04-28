@@ -41,12 +41,12 @@
   "home": {
     "manifestoKicker": "Маніфест — I",
     "manifesto": "Тут формується контекст.",
-    "manifestoBody": "Fashion West Ukraine — національна fashion-платформа нового покоління, що об’єднує моду, бізнес, мистецтво та стратегічні колаборації в єдину екосистему розвитку індустрії.",
+    "manifestoBody": "FWU — це більше, ніж один день. Ми проводимо захід раз на сезон, але те, що відбувається після нього, — найцінніше. Люди знайомляться, запускають спільні проєкти, знімають кампанії. Тому FWU — це не один день, це процес.",
     "enter": "Увійти до платформи",
     "featuredDesigners": "Голоси платформи",
     "featuredDesignersSub": "Дизайнери, бренди й автори, що формують екосистему",
     "latestEdition": "Поточна добірка Pop-Up",
-    "latestEditionSub": "Editor’s choice — обмежені наклади, runway pieces, capsule collections",
+    "latestEditionSub": "Редакційна добірка — обмежені наклади, речі з показів, капсульні колекції",
     "journal": "Журнал",
     "journalSub": "Хроніка платформи, інтервʼю, покази",
     "numbersKicker": "У цифрах",
@@ -64,7 +64,7 @@
   },
   "designers": {
     "title": "Дизайнери",
-    "subtitle": "Curated directory брендів платформи.",
+    "subtitle": "Curated-каталог брендів платформи.",
     "index": "Індекс",
     "all": "Усі",
     "philosophy": "Філософія бренду",
@@ -75,7 +75,7 @@
   },
   "popup": {
     "title": "FWU Pop-Up",
-    "subtitle": "Curated fashion selection. Не магазин, не маркетплейс — простір selected fashion pieces.",
+    "subtitle": "Curated-добірка моди. Не магазин і не маркетплейс — простір відібраних речей.",
     "limited": "Limited Drops",
     "runway": "Runway Pieces",
     "capsule": "Capsule Collections",
@@ -85,7 +85,7 @@
     "items": "позицій",
     "noResults": "Поки що порожньо",
     "inquire": "Залишити запит",
-    "inquireBody": "Кожна річ — частина обмеженого drop-у або capsule. Для запиту напишіть нам — менеджер платформи відповість упродовж робочого дня."
+    "inquireBody": "Кожна річ — частина обмеженого дропу або капсульної колекції. Для запиту напишіть нам — менеджер платформи відповість упродовж робочого дня."
   },
   "projects": {
     "title": "Проєкти",
@@ -93,7 +93,7 @@
     "shows": "FASHION WEST UKRAINE Shows",
     "showsBody": "Покази дизайнерів і брендів платформи у Закарпатті, з виходом на Україну та Європу.",
     "models": "FWU Models Awards",
-    "modelsBody": "Премія, що формує нову модельну сцену країни — від нових облич до professional standards.",
+    "modelsBody": "Премія, що формує нову модельну сцену країни — від нових облич до професійних стандартів.",
     "hackathon": "Fashion Hackathon",
     "hackathonBody": "Інтенсив, де дизайнери, технологи й підприємці створюють прототипи нових fashion-продуктів.",
     "international": "Міжнародні колаборації",
@@ -109,11 +109,11 @@
     "designers": "For Designers",
     "designersBody": "Подача бренду до curated directory, участь у показах і Pop-Up.",
     "brands": "For Brands",
-    "brandsBody": "Industry-партнерство, інтеграції, спільні проєкти.",
+    "brandsBody": "Індустрійне партнерство, інтеграції, спільні проєкти.",
     "media": "For Media",
     "mediaBody": "Медіа-партнерство, акредитація на події, ексклюзивні матеріали.",
     "sponsors": "For Sponsors",
-    "sponsorsBody": "Спонсорські пакети, brand visibility, закриті івенти для аудиторії.",
+    "sponsorsBody": "Спонсорські пакети, видимість бренду, закриті події для аудиторії.",
     "international": "For International Partners",
     "internationalBody": "Колаборації з європейськими брендами, інституціями, шоурумами.",
     "formTitle": "Залишити запит",
@@ -130,9 +130,9 @@
     "logosKicker": "Партнери платформи",
     "privilegesKicker": "Partner Privileges",
     "privilegesSub": "Спеціальні пропозиції для аудиторії FWU.",
-    "privatePieces": "Private offers — закриті drops і капсульні пропозиції.",
-    "invitations": "Invitations — запрошення на closed-door івенти.",
-    "specialServices": "Special services — сервіси від партнерів за привілейованими умовами.",
-    "closedExperiences": "Closed partner experiences — formats недоступні для широкої аудиторії."
+    "privatePieces": "Приватні пропозиції — закриті дропи та капсульні релізи.",
+    "invitations": "Запрошення на закриті події платформи.",
+    "specialServices": "Спеціальні сервіси від партнерів на привілейованих умовах.",
+    "closedExperiences": "Закриті партнерські формати, недоступні для широкої аудиторії."
   }
 }

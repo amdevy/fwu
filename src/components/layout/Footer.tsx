@@ -21,7 +21,10 @@ export async function Footer() {
           >
             {t('home.footerLine')}
           </p>
-          <p
+          <a
+            href="https://www.instagram.com/fw.ukraine"
+            target="_blank"
+            rel="noreferrer"
             style={{
               fontFamily: 'var(--font-mono)',
               fontSize: 11,
@@ -30,8 +33,8 @@ export async function Footer() {
               color: 'var(--fg-muted)',
             }}
           >
-            contact@fashionwest.ua
-          </p>
+            @fw.ukraine
+          </a>
         </div>
         <div>
           <h4>{ua ? 'Розділи' : 'Sections'}</h4>
@@ -48,14 +51,15 @@ export async function Footer() {
           <ul>
             <li><Link href="/collaboration">{t('nav.collaboration')}</Link></li>
             <li><Link href="/contacts">{t('nav.contacts')}</Link></li>
-            <li><a href="mailto:partners@fashionwest.ua">partners@fashionwest.ua</a></li>
-            <li><a href="mailto:popup@fashionwest.ua">popup@fashionwest.ua</a></li>
+            <li><a href="https://www.instagram.com/fw.cooperation" target="_blank" rel="noreferrer">@fw.cooperation</a></li>
+            <li><a href="https://www.instagram.com/fw.ukraine" target="_blank" rel="noreferrer">@fw.ukraine</a></li>
           </ul>
         </div>
         <div>
           <h4>{ua ? 'Слідкувати' : 'Follow'}</h4>
           <ul>
             <li><a href="https://www.instagram.com/fw.ukraine" target="_blank" rel="noreferrer">Instagram</a></li>
+            <li><a href="https://www.threads.com/@fw.ukraine" target="_blank" rel="noreferrer">Threads</a></li>
             <li><a href="https://t.me/fashionwestukraine2025" target="_blank" rel="noreferrer">Telegram</a></li>
           </ul>
         </div>

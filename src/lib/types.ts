@@ -17,6 +17,7 @@ export interface Designer {
   discipline: L10nString
   portrait: string
   hero: string
+  heroVideo?: string
   gallery: string[]
   lede: L10nString
   timeline: TimelineEntry[]
