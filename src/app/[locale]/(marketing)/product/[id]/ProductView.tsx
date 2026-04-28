@@ -3,39 +3,27 @@
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
-import { useCart } from '@/components/providers/CartProvider'
-import { fmtPrice } from '@/lib/format/currency'
 import type { Designer, Locale, Product } from '@/lib/types'
 
 type Props = { product: Product; designer: Designer; locale: Locale }
-type AccKey = 'details' | 'material' | 'sizeGuide' | 'shipping'
-
-const SIZES = ['XS', 'S', 'M', 'L', 'XL'] as const
+type AccKey = 'details' | 'material' | 'shipping'
 
 export default function ProductView({ product, designer, locale }: Props) {
   const t = useTranslations()
-  const { add, cart, showToast } = useCart()
-  const [size, setSize] = useState<string>('M')
   const [openAcc, setOpenAcc] = useState<AccKey | null>('details')
-  const inCart = cart.some((x) => x.productId === product.id && x.size === size)
-
-  const handleAdd = () => {
-    add(product.id, size)
-    showToast(`${t('product.added')} · ${product.title[locale]} · ${size}`)
-  }
 
   const accLabel: Record<AccKey, string> = {
     details: t('product.details'),
     material: t('common.material'),
-    sizeGuide: t('product.sizeGuide'),
     shipping: t('product.shipping'),
   }
   const accBody: Record<AccKey, string> = {
     details: t('product.detailsBody'),
     material: product.material[locale],
-    sizeGuide: 'XS 32–34 · S 34–36 · M 36–38 · L 40–42',
     shipping: t('product.shippingBody'),
   }
+
+  const inquireHref = 'https://www.instagram.com/fw.cooperation'
 
   return (
     <article className="fade-in">
@@ -49,7 +37,7 @@ export default function ProductView({ product, designer, locale }: Props) {
           color: 'var(--fg-muted)',
         }}
       >
-        <Link href="/catalog">{t('nav.catalog')}</Link>
+        <Link href="/pop-up">{t('nav.popup')}</Link>
         <span> / </span>
         <Link href={`/designers/${designer.slug}`}>{designer.brand}</Link>
         <span> / {product.title[locale]}</span>
@@ -73,36 +61,25 @@ export default function ProductView({ product, designer, locale }: Props) {
             <h1>{product.title[locale]}</h1>
           </div>
 
-          <div className="price">{fmtPrice(product.price)}</div>
-
-          <div>
-            <div className="kicker" style={{ marginBottom: 10 }}>{t('common.size')}</div>
-            <div className="size-row">
-              {SIZES.map((s, i) => {
-                const off = i === 4
-                return (
-                  <button
-                    key={s}
-                    className={`size ${size === s ? 'on' : ''} ${off ? 'off' : ''}`}
-                    onClick={() => !off && setSize(s)}
-                    disabled={off}
-                  >
-                    {s}
-                  </button>
-                )
-              })}
-            </div>
+          <div className="kicker" style={{ color: 'var(--accent)' }}>
+            {t('popup.editorsChoice')} · {product.category[locale]}
           </div>
 
-          <button
+          <p style={{ color: 'var(--fg-muted)', lineHeight: 1.6, margin: 0 }}>
+            {t('popup.inquireBody')}
+          </p>
+
+          <a
+            href={inquireHref}
+            target="_blank"
+            rel="noreferrer"
             className="hairline-btn solid"
             style={{ padding: '18px 24px', justifyContent: 'center' }}
-            onClick={handleAdd}
           >
-            {inCart ? `${t('common.inCart')} →` : t('common.addToCart')}
-          </button>
+            {t('common.requestPiece')} → Instagram
+          </a>
 
-          {(['details', 'material', 'sizeGuide', 'shipping'] as AccKey[]).map((k) => {
+          {(['details', 'material', 'shipping'] as AccKey[]).map((k) => {
             const open = openAcc === k
             return (
               <div key={k} className={`acc ${open ? 'open' : ''}`} onClick={() => setOpenAcc(open ? null : k)}>

@@ -35,10 +35,11 @@ export function MobileMenu() {
 
   const items: Array<[string, string]> = [
     ['/designers', t('nav.designers')],
-    ['/catalog', t('nav.catalog')],
+    ['/pop-up', t('nav.popup')],
+    ['/projects', t('nav.projects')],
     ['/about', t('nav.about')],
     ['/partners', t('nav.partners')],
-    ['/offers', t('nav.offers')],
+    ['/collaboration', t('nav.collaboration')],
     ['/contacts', t('nav.contacts')],
   ]
 
@@ -80,7 +81,7 @@ export function MobileMenu() {
               <button className={locale === 'ua' ? 'on' : ''} onClick={() => switchLang('ua')}>UA</button>
               <button className={locale === 'en' ? 'on' : ''} onClick={() => switchLang('en')}>EN</button>
             </div>
-            <a href="mailto:contact@fashionwest.ua" className="fw-m-mail">contact@fashionwest.ua</a>
+            <a href="https://www.instagram.com/fw.ukraine" target="_blank" rel="noreferrer" className="fw-m-mail">@fw.ukraine</a>
           </div>
         </div>,
         document.body,

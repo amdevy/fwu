@@ -147,11 +147,11 @@ export default async function Event2026() {
           ))}
         </div>
         <div style={{ marginTop: 48, display: 'flex', gap: 12 }}>
-          <a href="mailto:partners@fashionwest.ua" className="hairline-btn solid">
-            {ua ? 'Стати партнером' : 'Become a partner'}
+          <a href="https://www.instagram.com/fw.cooperation" target="_blank" rel="noreferrer" className="hairline-btn solid">
+            {ua ? 'Стати партнером' : 'Become a partner'} → @fw.cooperation
           </a>
-          <a href="mailto:press@fashionwest.ua" className="hairline-btn">
-            {ua ? 'Акредитація преси' : 'Press accreditation'}
+          <a href="https://www.instagram.com/fw.ukraine" target="_blank" rel="noreferrer" className="hairline-btn">
+            {ua ? 'Акредитація преси' : 'Press accreditation'} → @fw.ukraine
           </a>
         </div>
       </div>

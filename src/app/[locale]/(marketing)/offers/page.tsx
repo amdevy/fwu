@@ -62,7 +62,7 @@ export default async function OffersPage() {
               <h3 className="display" style={{ fontSize: 32, marginBottom: 12 }}>{o.title}</h3>
               <p style={{ color: 'var(--fg-muted)', lineHeight: 1.6 }}>{o.body}</p>
             </div>
-            <a href="mailto:offers@fashionwest.ua" className="hairline-btn">{o.cta} →</a>
+            <a href="https://www.instagram.com/fw.cooperation" target="_blank" rel="noreferrer" className="hairline-btn">{o.cta} →</a>
           </div>
         ))}
       </div>

@@ -9,8 +9,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: `${t('nav.contacts')} — ${t('brandFull')}`,
     description: locale === 'ua'
-      ? 'Звʼязок з редакцією, шоурумом і відділом партнерств.'
-      : 'Editorial, showroom and partnerships contact.',
+      ? 'Звʼязок з платформою FWU через Instagram.'
+      : 'Reach the FWU platform via Instagram.',
     alternates: altsFor(locale, '/contacts'),
   }
 }
@@ -22,16 +22,16 @@ export default async function ContactsPage() {
 
   const blocks = ua
     ? [
-        { kicker: 'Редакція', title: 'editorial@fashionwest.ua', sub: 'Інтервʼю, зйомки, журнал' },
-        { kicker: 'Шоурум', title: 'showroom@fashionwest.ua', sub: 'Ужгород, вул. Корзо 12 · за записом' },
-        { kicker: 'Партнерства', title: 'partners@fashionwest.ua', sub: 'Колаборації, виставки, інституції' },
-        { kicker: 'Преса', title: 'press@fashionwest.ua', sub: 'Релізи, акредитація на покази' },
+        { kicker: 'Платформа', title: '@fw.ukraine', sub: 'Маніфест, події, новини', href: 'https://www.instagram.com/fw.ukraine' },
+        { kicker: 'Співпраця', title: '@fw.cooperation', sub: 'Партнерства, бренди, медіа, інтеграції', href: 'https://www.instagram.com/fw.cooperation' },
+        { kicker: 'Threads', title: '@fw.ukraine', sub: 'Текстова стрічка платформи', href: 'https://www.threads.com/@fw.ukraine' },
+        { kicker: 'Квитки', title: 'FWU 2026', sub: '2 травня · Мукачево · Darlin\u2019 Hall', href: 'https://mukachevo.karabas.com/fashion-west-ukraine-2026/order' },
       ]
     : [
-        { kicker: 'Editorial', title: 'editorial@fashionwest.ua', sub: 'Interviews, shoots, journal' },
-        { kicker: 'Showroom', title: 'showroom@fashionwest.ua', sub: 'Uzhhorod, 12 Korzo St · by appointment' },
-        { kicker: 'Partnerships', title: 'partners@fashionwest.ua', sub: 'Collaborations, exhibitions, institutions' },
-        { kicker: 'Press', title: 'press@fashionwest.ua', sub: 'Releases, runway accreditation' },
+        { kicker: 'Platform', title: '@fw.ukraine', sub: 'Manifesto, events, news', href: 'https://www.instagram.com/fw.ukraine' },
+        { kicker: 'Cooperation', title: '@fw.cooperation', sub: 'Partnerships, brands, media, integrations', href: 'https://www.instagram.com/fw.cooperation' },
+        { kicker: 'Threads', title: '@fw.ukraine', sub: 'Platform text feed', href: 'https://www.threads.com/@fw.ukraine' },
+        { kicker: 'Tickets', title: 'FWU 2026', sub: '2 May · Mukachevo · Darlin\u2019 Hall', href: 'https://mukachevo.karabas.com/fashion-west-ukraine-2026/order' },
       ]
 
   return (
@@ -39,7 +39,7 @@ export default async function ContactsPage() {
       <div className="sec-head">
         <div className="sh-num">N°—</div>
         <h1 className="sh-title">{t('nav.contacts')}</h1>
-        <div className="sh-sub">{ua ? 'Чотири адреси, одна редакція.' : 'Four addresses, one editorial.'}</div>
+        <div className="sh-sub">{ua ? 'Усі робочі запити — у Direct.' : 'All working requests — via Direct.'}</div>
       </div>
 
       <div
@@ -54,7 +54,9 @@ export default async function ContactsPage() {
         {blocks.map((b, i) => (
           <a
             key={i}
-            href={`mailto:${b.title}`}
+            href={b.href}
+            target="_blank"
+            rel="noreferrer"
             style={{
               padding: '48px 32px',
               borderRight: i % 2 === 0 ? '1px solid var(--rule)' : 'none',
@@ -69,12 +71,12 @@ export default async function ContactsPage() {
         ))}
       </div>
 
-      <div style={{ padding: '0 var(--gutter) 120px', maxWidth: 720, margin: '0 auto' }}>
-        <div className="kicker" style={{ marginBottom: 8 }}>{ua ? 'Шоурум' : 'Showroom'}</div>
+      <div style={{ padding: '0 var(--gutter) 120px', maxWidth: 720, margin: '0 auto', textAlign: 'center' }}>
+        <div className="kicker" style={{ marginBottom: 8 }}>{ua ? 'Майданчик' : 'Venue'}</div>
         <p style={{ fontSize: 17, lineHeight: 1.6, color: 'var(--fg-muted)' }}>
           {ua
-            ? 'Ужгород, вул. Корзо 12. Прийом — за попереднім записом, вівторок–субота, 12:00–19:00.'
-            : 'Uzhhorod, 12 Korzo Street. By appointment, Tuesday–Saturday, 12:00–19:00.'}
+            ? 'Fashion West Ukraine 2026 — 2 травня, Мукачево, Darlin\u2019 Hall. Закарпаття.'
+            : 'Fashion West Ukraine 2026 — 2 May, Mukachevo, Darlin\u2019 Hall. Transcarpathia.'}
         </p>
       </div>
     </section>

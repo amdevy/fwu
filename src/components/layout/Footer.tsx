@@ -21,7 +21,10 @@ export async function Footer() {
           >
             {t('home.footerLine')}
           </p>
-          <p
+          <a
+            href="https://www.instagram.com/fw.ukraine"
+            target="_blank"
+            rel="noreferrer"
             style={{
               fontFamily: 'var(--font-mono)',
               fontSize: 11,
@@ -30,31 +33,33 @@ export async function Footer() {
               color: 'var(--fg-muted)',
             }}
           >
-            contact@fashionwest.ua
-          </p>
+            @fw.ukraine
+          </a>
         </div>
         <div>
           <h4>{ua ? 'Розділи' : 'Sections'}</h4>
           <ul>
             <li><Link href="/about">{t('nav.about')}</Link></li>
             <li><Link href="/designers">{t('nav.designers')}</Link></li>
-            <li><Link href="/catalog">{t('nav.catalog')}</Link></li>
+            <li><Link href="/pop-up">{t('nav.popup')}</Link></li>
+            <li><Link href="/projects">{t('nav.projects')}</Link></li>
             <li><Link href="/partners">{t('nav.partners')}</Link></li>
           </ul>
         </div>
         <div>
-          <h4>{ua ? 'Сервіс' : 'Service'}</h4>
+          <h4>{ua ? 'Співпраця' : 'Engage'}</h4>
           <ul>
-            <li><Link href="/cart">{t('nav.cart')}</Link></li>
-            <li><span>{ua ? 'Доставка' : 'Shipping'}</span></li>
-            <li><span>{ua ? 'Повернення' : 'Returns'}</span></li>
-            <li><span>FAQ</span></li>
+            <li><Link href="/collaboration">{t('nav.collaboration')}</Link></li>
+            <li><Link href="/contacts">{t('nav.contacts')}</Link></li>
+            <li><a href="https://www.instagram.com/fw.cooperation" target="_blank" rel="noreferrer">@fw.cooperation</a></li>
+            <li><a href="https://www.instagram.com/fw.ukraine" target="_blank" rel="noreferrer">@fw.ukraine</a></li>
           </ul>
         </div>
         <div>
           <h4>{ua ? 'Слідкувати' : 'Follow'}</h4>
           <ul>
             <li><a href="https://www.instagram.com/fw.ukraine" target="_blank" rel="noreferrer">Instagram</a></li>
+            <li><a href="https://www.threads.com/@fw.ukraine" target="_blank" rel="noreferrer">Threads</a></li>
             <li><a href="https://t.me/fashionwestukraine2025" target="_blank" rel="noreferrer">Telegram</a></li>
           </ul>
         </div>

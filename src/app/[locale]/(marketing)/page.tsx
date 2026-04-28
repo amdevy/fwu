@@ -1,9 +1,11 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import HeroV2 from '@/components/home/HeroV2'
-import Manifesto from '@/components/home/Manifesto'
 import FeaturedDesigners from '@/components/home/FeaturedDesigners'
 import LatestEdition from '@/components/home/LatestEdition'
+import EventsTeaser from '@/components/home/EventsTeaser'
+import PressStrip from '@/components/home/PressStrip'
+import CtaTriple from '@/components/home/CtaTriple'
 import Numbers from '@/components/home/Numbers'
 import JournalTease from '@/components/home/JournalTease'
 import { SITE_URL, altsFor } from '@/lib/seo'
@@ -44,10 +46,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
       <HeroV2 />
-      <Manifesto />
+      <EventsTeaser />
       <FeaturedDesigners />
       <LatestEdition />
+      <PressStrip />
       <Numbers />
+      <CtaTriple />
       <JournalTease />
     </>
   )
