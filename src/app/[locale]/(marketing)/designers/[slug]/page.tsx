@@ -5,7 +5,6 @@ import { Link } from '@/i18n/navigation'
 import { designers, getDesigner, getProductsByDesigner } from '@/lib/data/seed'
 import type { Locale } from '@/lib/types'
 import { altsFor } from '@/lib/seo'
-import LogoBox from '@/components/designers/LogoBox'
 
 export function generateStaticParams() {
   return designers.flatMap((d) => [
@@ -85,8 +84,7 @@ export default async function DossierPage({ params }: { params: Promise<{ slug: 
 
       <div className="dossier-body">
         <aside className="dx-sidebar">
-          {designer.logo && <LogoBox src={designer.logo} brand={designer.brand} />}
-          <div className="kicker" style={{ marginTop: 24, marginBottom: 16 }}>{ua ? 'Досьє' : 'Dossier'}</div>
+          <div className="kicker" style={{ marginBottom: 16 }}>{ua ? 'Досьє' : 'Dossier'}</div>
           <dl>
             <dt>{ua ? 'Бренд' : 'Brand'}</dt><dd>{designer.brand}</dd>
             <dt>{ua ? 'Місто' : 'City'}</dt><dd>{designer.city[locale]}</dd>

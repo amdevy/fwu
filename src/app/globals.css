@@ -1000,36 +1000,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   .dossier-nav .dn-name { font-size: 18px; }
 }
 
-/* ===== Designer logo box (sidebar) — bare logo, no frame ===== */
-.logo-box {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  background: transparent;
-  border: none;
-  padding: 0;
-}
-.logo-box img {
-  object-fit: contain;
-  display: block;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-}
-.logo-box-square img { max-width: 60%; max-height: 140px; }
-.logo-box-wide   img { max-width: 100%; max-height: 90px; }
-.logo-box-tall   img { max-width: 45%; max-height: 180px; }
-.logo-box-fallback span {
-  font-family: var(--font-display);
-  font-size: 26px;
-  letter-spacing: -0.01em;
-  color: var(--fg);
-  text-align: center;
-  line-height: 1.15;
-  padding: 0 8px;
-}
-
 /* ===== Designer logo grid ===== */
 .logo-grid {
   display: grid;
