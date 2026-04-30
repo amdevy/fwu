@@ -4,7 +4,7 @@
   "nav": {
     "about": "Про платформу",
     "designers": "Дизайнери",
-    "popup": "FWU Pop-Up",
+    "popup": "Pop-Up",
     "projects": "Проєкти",
     "partners": "Партнери",
     "collaboration": "Співпраця",
@@ -74,7 +74,7 @@
     "collaborate": "Collaboration Request"
   },
   "popup": {
-    "title": "FWU Pop-Up",
+    "title": "Pop-Up",
     "subtitle": "Curated-добірка моди. Не магазин і не маркетплейс — простір відібраних речей.",
     "limited": "Limited Drops",
     "runway": "Runway Pieces",
