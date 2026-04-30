@@ -5,14 +5,14 @@ export default async function JournalTease() {
   const locale = await getLocale()
   const entries = locale === 'ua'
     ? [
-        { kicker: 'Інтерв\'ю', title: 'Ірина Ковач: вовна пам\'ятає все', img: 'https://images.unsplash.com/photo-1551232864-3f0890e580d9?w=1200&q=80', date: '14.04.2026' },
-        { kicker: 'Показ', title: 'Закриті перегляди у Мукачеві', img: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1200&q=80', date: '02.04.2026' },
-        { kicker: 'Нотатки редакції', title: 'Чому Захід — це не фольклор', img: 'https://images.unsplash.com/photo-1506152983158-b4a74a01c721?w=1200&q=80', date: '21.03.2026' },
+        { kicker: 'Маніфест', title: 'FWU — це не один день, це процес', img: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&q=80', date: '28.04.2026' },
+        { kicker: 'Освіта', title: 'Програма спікерів: про що говоритимемо у Мукачеві', img: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=1200&q=80', date: '22.04.2026' },
+        { kicker: 'Партнери', title: 'Sams Concept Store виходить на подіум FWU', img: 'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=1200&q=80', date: '18.04.2026' },
       ]
     : [
-        { kicker: 'Interview', title: 'Iryna Kovach: wool remembers everything', img: 'https://images.unsplash.com/photo-1551232864-3f0890e580d9?w=1200&q=80', date: '14.04.2026' },
-        { kicker: 'Runway', title: 'Closed viewings in Mukachevo', img: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1200&q=80', date: '02.04.2026' },
-        { kicker: 'Editor\'s note', title: 'Why the West is not folklore', img: 'https://images.unsplash.com/photo-1506152983158-b4a74a01c721?w=1200&q=80', date: '21.03.2026' },
+        { kicker: 'Manifesto', title: 'FWU is not one day — it is a process', img: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&q=80', date: '28.04.2026' },
+        { kicker: 'Education', title: 'Speaker program: what we will discuss in Mukachevo', img: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=1200&q=80', date: '22.04.2026' },
+        { kicker: 'Partners', title: 'Sams Concept Store steps onto the FWU runway', img: 'https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=1200&q=80', date: '18.04.2026' },
       ]
   return (
     <section>
@@ -23,13 +23,13 @@ export default async function JournalTease() {
       </div>
       <div className="grid-3">
         {entries.map((e, i) => (
-          <a key={i} className="card">
+          <div key={i} className="card" style={{ cursor: 'default' }}>
             <div className="card-img-wrap"><img src={e.img} alt={e.title} loading="lazy" /></div>
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--fg-muted)', marginBottom: 6 }}>
               {e.kicker} · {e.date}
             </div>
             <h3 className="card-title" style={{ fontSize: 24, textWrap: 'balance' }}>{e.title}</h3>
-          </a>
+          </div>
         ))}
       </div>
     </section>

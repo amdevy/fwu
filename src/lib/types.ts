@@ -18,6 +18,7 @@ export interface Designer {
   portrait: string
   hero: string
   heroVideo?: string
+  logo?: string
   gallery: string[]
   lede: L10nString
   timeline: TimelineEntry[]

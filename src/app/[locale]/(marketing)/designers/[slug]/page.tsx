@@ -37,6 +37,9 @@ export default async function DossierPage({ params }: { params: Promise<{ slug: 
   const prev = designers[(idx - 1 + designers.length) % designers.length]
   const next = designers[(idx + 1) % designers.length]
   const designerProducts = getProductsByDesigner(designer.id)
+  const disciplineLabel = designer.discipline[locale]?.trim()
+  const hasDiscipline = !!disciplineLabel && disciplineLabel !== '—' && disciplineLabel !== '-'
+  const showBrandInMeta = designer.brand && designer.brand !== designer.name[locale]
 
   const ld = {
     '@context': 'https://schema.org',
@@ -47,8 +50,6 @@ export default async function DossierPage({ params }: { params: Promise<{ slug: 
     address: { '@type': 'PostalAddress', addressLocality: designer.city[locale], addressCountry: 'UA' },
     brand: { '@type': 'Brand', name: designer.brand, foundingDate: String(designer.founded) },
   }
-
-  const igHandle = designer.brand.toLowerCase().replace(/[^a-z0-9]+/g, '')
 
   const showsHistory = ua
     ? [
@@ -63,18 +64,23 @@ export default async function DossierPage({ params }: { params: Promise<{ slug: 
   return (
     <article className="fade-in">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
-      <div className="dossier-hero">
-        <img src={designer.hero} alt={designer.name[locale]} />
-        <div className="dh-content">
-          <div className="dh-meta" style={{ marginBottom: 16 }}>
+      <header className={`dossier-hero-v2 ${designer.hero ? '' : 'dossier-hero-v2-solo'}`}>
+        <div className="dh2-text">
+          <div className="dh2-meta">
             <span>№{String(idx + 1).padStart(2, '0')} / {String(designers.length).padStart(2, '0')}</span>
-            <span>{designer.brand}</span>
-            <span>{designer.city[locale]} · {t('common.since')} {designer.founded}</span>
+            <span>{t('common.since')} {designer.founded}</span>
+            <span>{designer.city[locale]}</span>
           </div>
-          <h1>{designer.name[locale]}</h1>
-          <div className="dh-meta">{designer.discipline[locale]}</div>
+          <h1 className="dh2-title">{designer.name[locale]}</h1>
+          {showBrandInMeta && <div className="dh2-brand">{designer.brand}</div>}
+          {hasDiscipline && <div className="dh2-disc">{disciplineLabel}</div>}
         </div>
-      </div>
+        {designer.hero && (
+          <div className="dh2-frame">
+            <img src={designer.hero} alt={designer.name[locale]} />
+          </div>
+        )}
+      </header>
 
       <div className="dossier-body">
         <aside className="dx-sidebar">
@@ -83,21 +89,24 @@ export default async function DossierPage({ params }: { params: Promise<{ slug: 
             <dt>{ua ? 'Бренд' : 'Brand'}</dt><dd>{designer.brand}</dd>
             <dt>{ua ? 'Місто' : 'City'}</dt><dd>{designer.city[locale]}</dd>
             <dt>{ua ? 'Засновано' : 'Founded'}</dt><dd>{designer.founded}</dd>
-            <dt>{ua ? 'Напрям' : 'Discipline'}</dt><dd>{designer.discipline[locale]}</dd>
+            {hasDiscipline && (<><dt>{ua ? 'Напрям' : 'Discipline'}</dt><dd>{disciplineLabel}</dd></>)}
           </dl>
-          <div className="kicker" style={{ marginTop: 32, marginBottom: 12 }}>{t('designers.social')}</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            <a href={`https://instagram.com/${igHandle}`} target="_blank" rel="noreferrer" style={{ fontSize: 14 }}>@{igHandle} ↗</a>
-            <a href="https://www.instagram.com/fw.cooperation" target="_blank" rel="noreferrer" style={{ fontSize: 14 }}>{t('designers.collaborate')} ↗</a>
-          </div>
         </aside>
         <div>
-          <p className="lede">{designer.lede[locale]}</p>
+          {designer.lede[locale]?.trim() &&
+            designer.lede[locale] !== 'Опис буде додано.' &&
+            designer.lede[locale] !== 'Description coming soon.' && (
+              <p className="lede">{designer.lede[locale]}</p>
+            )}
 
-          <div className="kicker" style={{ marginTop: 48, marginBottom: 12 }}>{t('designers.philosophy')}</div>
-          <p style={{ fontSize: 17, lineHeight: 1.7, color: 'var(--fg-muted)' }}>
-            &ldquo;{designer.quote[locale]}&rdquo;
-          </p>
+          {designer.quote[locale]?.trim() && (
+            <>
+              <div className="kicker" style={{ marginTop: 48, marginBottom: 12 }}>{t('designers.philosophy')}</div>
+              <p style={{ fontSize: 17, lineHeight: 1.7, color: 'var(--fg-muted)' }}>
+                &ldquo;{designer.quote[locale]}&rdquo;
+              </p>
+            </>
+          )}
         </div>
       </div>
 
@@ -127,13 +136,15 @@ export default async function DossierPage({ params }: { params: Promise<{ slug: 
         ))}
       </div>
 
-      <div className="gal-grid">
-        {designer.gallery.map((src, i) => (
-          <div key={i} className={`gal-item ${i === 0 ? 'tall' : ''}`}>
-            <img src={src} alt="" loading="lazy" />
-          </div>
-        ))}
-      </div>
+      {designer.gallery.length > 0 && (
+        <div className="gal-grid">
+          {designer.gallery.map((src, i) => (
+            <div key={i} className={`gal-item ${i === 0 ? 'tall' : ''}`}>
+              <img src={src} alt="" loading="lazy" />
+            </div>
+          ))}
+        </div>
+      )}
 
       {designerProducts.length > 0 && (
         <>
@@ -170,20 +181,17 @@ export default async function DossierPage({ params }: { params: Promise<{ slug: 
           <a href="https://www.instagram.com/fw.cooperation" target="_blank" rel="noreferrer" className="hairline-btn solid">
             Instagram · @fw.cooperation →
           </a>
-          <a href={`https://www.instagram.com/${igHandle}`} target="_blank" rel="noreferrer" className="hairline-btn">
-            {designer.brand} →
-          </a>
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', borderTop: '1px solid var(--fg)', margin: '0 var(--gutter) 96px' }}>
-        <Link href={`/designers/${prev.slug}`} style={{ padding: '32px 0', borderRight: '1px solid var(--rule)', paddingRight: 32 }}>
+      <div className="dossier-nav">
+        <Link href={`/designers/${prev.slug}`} className="dn-prev">
           <div className="kicker" style={{ marginBottom: 8 }}>← {t('common.prevDesigner')}</div>
-          <div className="display" style={{ fontSize: 32 }}>{prev.name[locale]}</div>
+          <div className="display dn-name">{prev.name[locale]}</div>
         </Link>
-        <Link href={`/designers/${next.slug}`} style={{ padding: '32px 0 32px 32px', textAlign: 'right' }}>
+        <Link href={`/designers/${next.slug}`} className="dn-next">
           <div className="kicker" style={{ marginBottom: 8 }}>{t('common.nextDesigner')} →</div>
-          <div className="display" style={{ fontSize: 32 }}>{next.name[locale]}</div>
+          <div className="display dn-name">{next.name[locale]}</div>
         </Link>
       </div>
     </article>
