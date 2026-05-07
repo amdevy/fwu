@@ -1,0 +1,28 @@
+# Fashion West Ukraine
+
+> Fashion West Ukraine (FWU) is a national next-generation fashion platform uniting fashion, business, art and strategic collaborations. FWU operates seasonally across western Ukrainian cities (Uzhhorod, Mukachevo, Lviv) with a curated roster of ~20 Ukrainian designers, runway showcases, pop-up selections, journal, and partner programs. Launched 2024.
+
+## Key pages
+
+- [Home (UA)](https://fashionwestukraine.com/): Platform manifesto, current designers, upcoming events.
+- [Home (EN)](https://fashionwestukraine.com/en): English landing page.
+- [About FWU](https://fashionwestukraine.com/en/about): Mission, ecosystem, sections (Platform, Community, Media, Expo, Education, International).
+- [Designers](https://fashionwestukraine.com/en/designers): Curated directory of 20 Ukrainian fashion brands on the platform.
+- [Pop-Up Selection](https://fashionwestukraine.com/en/pop-up): Curated selection of pieces — not a shop, a space of selected fashion.
+- [Projects](https://fashionwestukraine.com/en/projects): Runway shows, models program, hackathon, international, education.
+- [Partners](https://fashionwestukraine.com/en/partners): Brand, media, education, venue, logistics partners.
+- [Collaboration](https://fashionwestukraine.com/en/collaboration): Working directions for designers, brands, media, sponsors, international.
+- [FWU 2026 event](https://fashionwestukraine.com/en/event/2026): 2 May 2026, Mukachevo, Darlin Hall — runways, networking, cultural stage.
+- [Contacts](https://fashionwestukraine.com/en/contacts): Reach via @fw.ukraine and @fw.cooperation on Instagram.
+
+## Sitemaps & feeds
+
+- [XML sitemap](https://fashionwestukraine.com/sitemap.xml)
+- [robots.txt](https://fashionwestukraine.com/robots.txt)
+
+## Identity
+
+- Instagram: https://www.instagram.com/fw.ukraine
+- Cooperation: https://www.instagram.com/fw.cooperation
+- Threads: https://www.threads.com/@fw.ukraine
+- Tickets (FWU 2026): https://mukachevo.karabas.com/fashion-west-ukraine-2026/order

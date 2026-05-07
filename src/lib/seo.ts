@@ -20,3 +20,17 @@ export const altsFor = (locale: string, route: string) => ({
     'en-US': localeUrl('en', route),
   },
 })
+
+export const breadcrumbLd = (
+  locale: string,
+  trail: { name: string; route: string }[],
+) => ({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: trail.map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: c.name,
+    item: `${SITE_URL}${localeUrl(locale, c.route)}`,
+  })),
+})

@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import { getLocale, getTranslations } from 'next-intl/server'
 import type { Locale } from '@/lib/types'
-import { altsFor } from '@/lib/seo'
+import { SITE_URL, altsFor, breadcrumbLd } from '@/lib/seo'
+import JsonLd from '@/components/seo/JsonLd'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
@@ -17,7 +18,47 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function Event2026() {
   const locale = (await getLocale()) as Locale
+  const t = await getTranslations()
   const ua = locale === 'ua'
+
+  const ld = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Event',
+      name: 'Fashion West Ukraine 2026',
+      startDate: '2026-05-02T13:00:00+03:00',
+      endDate: '2026-05-03T01:00:00+03:00',
+      eventStatus: 'https://schema.org/EventScheduled',
+      eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+      location: {
+        '@type': 'Place',
+        name: 'Darlin Hall',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Mukachevo',
+          addressRegion: 'Zakarpattia',
+          addressCountry: 'UA',
+        },
+      },
+      organizer: {
+        '@type': 'Organization',
+        name: 'Fashion West Ukraine',
+        url: SITE_URL,
+      },
+      offers: {
+        '@type': 'Offer',
+        url: 'https://mukachevo.karabas.com/fashion-west-ukraine-2026/order',
+        availability: 'https://schema.org/InStock',
+      },
+      description: ua
+        ? '2 травня 2026, Мукачево, Darlin Hall. Покази, нетворкінг, сцена культури.'
+        : '2 May 2026, Mukachevo, Darlin Hall. Runways, networking, cultural stage.',
+    },
+    breadcrumbLd(locale, [
+      { name: t('brandFull'), route: '' },
+      { name: 'FWU 2026', route: '/event/2026' },
+    ]),
+  ]
 
   const program = ua
     ? [
@@ -51,6 +92,7 @@ export default async function Event2026() {
 
   return (
     <section className="fade-in">
+      <JsonLd data={ld} />
       <div className="sec-head">
         <div className="sh-num">N°2026</div>
         <h1 className="sh-title">{ua ? 'FWU 2026' : 'FWU 2026'}</h1>

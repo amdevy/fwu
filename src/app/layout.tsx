@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Bodoni_Moda, Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { getLocale } from 'next-intl/server'
 import './globals.css'
 
 const bodoni = Bodoni_Moda({
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: 'Fashion West Ukraine — елітна fashion-платформа Закарпаття',
-    template: '%s | Fashion West Ukraine',
+    template: '%s',
   },
   description:
     'Fashion West Ukraine — елітний шоурум і fashion-платформа Закарпаття: українські дизайнери, закриті колекції, події, партнери. Ужгород, Львів, Україна.',
@@ -52,7 +53,6 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
   alternates: {
-    canonical: '/',
     languages: {
       'uk-UA': '/ua',
       'en-US': '/en',
@@ -62,13 +62,15 @@ export const metadata: Metadata = {
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const locale = await getLocale()
+  const lang = locale === 'ua' ? 'uk' : locale
   return (
-    <html className={`${bodoni.variable} ${inter.variable}`} suppressHydrationWarning>
+    <html lang={lang} className={`${bodoni.variable} ${inter.variable}`} suppressHydrationWarning>
       <body suppressHydrationWarning>
         {GA_ID && (
           <>

@@ -4,7 +4,8 @@ import { getLocale, getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
 import { designers, getDesigner, getProductsByDesigner } from '@/lib/data/seed'
 import type { Locale } from '@/lib/types'
-import { altsFor } from '@/lib/seo'
+import { altsFor, breadcrumbLd } from '@/lib/seo'
+import JsonLd from '@/components/seo/JsonLd'
 
 export function generateStaticParams() {
   return designers.flatMap((d) => [
@@ -41,15 +42,22 @@ export default async function DossierPage({ params }: { params: Promise<{ slug: 
   const hasDiscipline = !!disciplineLabel && disciplineLabel !== '—' && disciplineLabel !== '-'
   const showBrandInMeta = designer.brand && designer.brand !== designer.name[locale]
 
-  const ld = {
-    '@context': 'https://schema.org',
-    '@type': 'Person',
-    name: designer.name[locale],
-    image: designer.portrait,
-    jobTitle: designer.discipline[locale],
-    address: { '@type': 'PostalAddress', addressLocality: designer.city[locale], addressCountry: 'UA' },
-    brand: { '@type': 'Brand', name: designer.brand, foundingDate: String(designer.founded) },
-  }
+  const ld = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: designer.name[locale],
+      image: designer.portrait,
+      jobTitle: designer.discipline[locale],
+      address: { '@type': 'PostalAddress', addressLocality: designer.city[locale], addressCountry: 'UA' },
+      brand: { '@type': 'Brand', name: designer.brand, foundingDate: String(designer.founded) },
+    },
+    breadcrumbLd(locale, [
+      { name: t('brandFull'), route: '' },
+      { name: t('designers.title'), route: '/designers' },
+      { name: designer.name[locale], route: `/designers/${slug}` },
+    ]),
+  ]
 
   const showsHistory = ua
     ? [
@@ -63,7 +71,7 @@ export default async function DossierPage({ params }: { params: Promise<{ slug: 
 
   return (
     <article className="fade-in">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
+      <JsonLd data={ld} />
       <header className={`dossier-hero-v2 ${designer.hero ? '' : 'dossier-hero-v2-solo'}`}>
         <div className="dh2-text">
           <div className="dh2-meta">
