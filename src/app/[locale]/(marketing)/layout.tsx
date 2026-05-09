@@ -4,6 +4,7 @@ import { ThemeProvider } from '@/components/providers/ThemeProvider'
 import { Header } from '@/components/layout/Header'
 import { MarqueeStrip } from '@/components/layout/MarqueeStrip'
 import { Footer } from '@/components/layout/Footer'
+import { AnnouncementBar } from '@/components/layout/AnnouncementBar'
 
 export default async function MarketingLayout({
   children,
@@ -14,6 +15,7 @@ export default async function MarketingLayout({
   return (
     <NextIntlClientProvider messages={messages}>
       <ThemeProvider>
+        <AnnouncementBar />
         <Header />
         <MarqueeStrip />
         <main className="fade-in">{children}</main>

@@ -97,29 +97,15 @@ export default async function Event2026() {
         <div className="sh-sub">{ua ? 'Recap · Мукачево · Darlin Hall' : 'Recap · Mukachevo · Darlin Hall'}</div>
       </div>
 
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          margin: '0 var(--gutter) 64px',
-          borderTop: '1px solid var(--fg)',
-          borderBottom: '1px solid var(--rule)',
-        }}
-      >
+      <div className="event-meta-strip">
         {[
           { k: ua ? 'Дата' : 'Date', v: ua ? '2 травня 2026' : '2 May 2026' },
           { k: ua ? 'Місце' : 'Venue', v: ua ? 'Darlin Hall, Мукачево' : 'Darlin Hall, Mukachevo' },
           { k: ua ? 'Формат' : 'Format', v: ua ? 'Покази · Експо · Сцена' : 'Runways · Expo · Stage' },
         ].map((b, i) => (
-          <div
-            key={i}
-            style={{
-              padding: '40px 32px',
-              borderRight: i < 2 ? '1px solid var(--rule)' : 'none',
-            }}
-          >
+          <div key={i} className="event-meta-cell">
             <div className="kicker" style={{ marginBottom: 12 }}>{b.k}</div>
-            <div className="display" style={{ fontSize: 28 }}>{b.v}</div>
+            <div className="display event-meta-val">{b.v}</div>
           </div>
         ))}
       </div>
@@ -191,7 +177,7 @@ export default async function Event2026() {
 
       <div style={{ padding: '0 var(--gutter) 96px' }}>
         <div className="kicker" style={{ marginBottom: 24 }}>{ua ? 'Ведучі' : 'Hosts'}</div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 32 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 32 }}>
           {hosts.map((h, i) => (
             <div key={i} style={{ borderTop: '1px solid var(--fg)', paddingTop: 24 }}>
               <h3 className="display" style={{ fontSize: 28, marginBottom: 6 }}>{h.name}</h3>
