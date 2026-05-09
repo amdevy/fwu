@@ -25,6 +25,27 @@ export interface Designer {
   quote: L10nString
 }
 
+export interface PhotographerEventFolder {
+  label: L10nString
+  url: string
+}
+
+export interface Photographer {
+  id: string
+  slug: string
+  name: L10nString
+  city?: L10nString
+  bio?: L10nString
+  avatar?: string
+  instagram?: string
+  driveMainUrl: string
+  designerFolders: Record<string, string>
+  generalFolders?: PhotographerEventFolder[]
+  event: string
+  eventLabel: L10nString
+  eventDate: string
+}
+
 export interface Product {
   id: string
   num: string

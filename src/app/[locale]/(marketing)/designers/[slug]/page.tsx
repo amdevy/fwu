@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
 import { designers, getDesigner, getProductsByDesigner } from '@/lib/data/seed'
+import { getPhotographersForDesigner } from '@/lib/data/photographers'
 import type { Locale } from '@/lib/types'
 import { altsFor, breadcrumbLd } from '@/lib/seo'
 import JsonLd from '@/components/seo/JsonLd'
@@ -38,6 +39,7 @@ export default async function DossierPage({ params }: { params: Promise<{ slug: 
   const prev = designers[(idx - 1 + designers.length) % designers.length]
   const next = designers[(idx + 1) % designers.length]
   const designerProducts = getProductsByDesigner(designer.id)
+  const designerPhotographers = getPhotographersForDesigner(designer.slug)
   const disciplineLabel = designer.discipline[locale]?.trim()
   const hasDiscipline = !!disciplineLabel && disciplineLabel !== '—' && disciplineLabel !== '-'
   const showBrandInMeta = designer.brand && designer.brand !== designer.name[locale]
@@ -176,6 +178,50 @@ export default async function DossierPage({ params }: { params: Promise<{ slug: 
             ))}
           </div>
         </>
+      )}
+
+      {designerPhotographers.length > 0 && (
+        <section style={{ padding: '64px var(--gutter)', borderTop: '1px solid var(--rule)' }}>
+          <div className="kicker" style={{ marginBottom: 16 }}>
+            {ua ? 'Фото з показу' : 'Show photography'}
+          </div>
+          <h2 className="display" style={{ fontSize: 'clamp(28px, 4vw, 44px)', marginBottom: 24 }}>
+            {ua ? 'Фотографи' : 'Photographers'}
+          </h2>
+          <p style={{ color: 'var(--fg-muted)', maxWidth: 640, marginBottom: 32, lineHeight: 1.6 }}>
+            {ua
+              ? 'Повні архіви фото з показу зберігаються на Google Drive у фотографів події.'
+              : 'Full photo archives from the show are stored on Google Drive by the event photographers.'}
+          </p>
+          <div className="grid-2" style={{ gap: 16 }}>
+            {designerPhotographers.map((p) => {
+              const url = p.designerFolders[designer.slug]
+              const ready = !!url && !url.startsWith('TODO')
+              return (
+                <div key={p.id} className="card" style={{ padding: 24 }}>
+                  <div className="kicker" style={{ marginBottom: 8 }}>{p.eventLabel[locale]}</div>
+                  <h3 className="card-title" style={{ fontSize: 22, marginBottom: 16 }}>
+                    {p.name[locale]}
+                  </h3>
+                  <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                    {ready ? (
+                      <a href={url} target="_blank" rel="noreferrer" className="hairline-btn solid">
+                        {ua ? 'Папка дизайнера →' : 'Designer folder →'}
+                      </a>
+                    ) : (
+                      <span className="hairline-btn" style={{ opacity: 0.5 }}>
+                        {ua ? 'Незабаром' : 'Coming soon'}
+                      </span>
+                    )}
+                    <Link href={`/photographers/${p.slug}`} className="hairline-btn">
+                      {ua ? 'Профіль фотографа' : 'Photographer profile'} →
+                    </Link>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </section>
       )}
 
       <div style={{ padding: '96px var(--gutter)', textAlign: 'center', borderTop: '1px solid var(--rule)' }}>
