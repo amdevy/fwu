@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import HeroV2 from '@/components/home/HeroV2'
+import ArchivesAnnounce from '@/components/home/ArchivesAnnounce'
 import FeaturedDesigners from '@/components/home/FeaturedDesigners'
 import LatestEdition from '@/components/home/LatestEdition'
 import EventsTeaser from '@/components/home/EventsTeaser'
@@ -46,6 +47,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
       <HeroV2 />
+      <ArchivesAnnounce />
       <EventsTeaser />
       <FeaturedDesigners />
       <LatestEdition />

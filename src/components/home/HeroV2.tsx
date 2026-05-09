@@ -72,7 +72,7 @@ export default async function HeroV2() {
             className='hv2-rise'
             style={{ display: 'flex', gap: 12, animationDelay: '680ms' }}
           >
-            <Link href='/designers' className='hairline-btn solid'>
+            <Link href='/event/2026' className='hairline-btn solid'>
               {t('home.enter')}
             </Link>
             <Link href='/pop-up' className='hairline-btn'>

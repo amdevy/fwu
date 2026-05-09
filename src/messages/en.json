@@ -5,6 +5,7 @@
     "about": "About FWU",
     "designers": "Designers",
     "popup": "Pop-Up",
+    "photographers": "Photographers",
     "projects": "Projects",
     "partners": "Partners",
     "collaboration": "Collaboration",
@@ -134,5 +135,10 @@
     "invitations": "Invitations — to closed-door events.",
     "specialServices": "Special services — partner services on privileged terms.",
     "closedExperiences": "Closed partner experiences — formats unavailable to the wider audience."
+  },
+  "photographers": {
+    "kicker": "Event archives",
+    "title": "Photographers",
+    "subtitle": "Full photo archives from Fashion West Ukraine shows — hosted on Google Drive by event photographers. Open a photographer to browse their folders by designer."
   }
 }
