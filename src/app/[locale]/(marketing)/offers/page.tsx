@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import { getLocale, getTranslations } from 'next-intl/server'
 import type { Locale } from '@/lib/types'
-import { altsFor } from '@/lib/seo'
+import { altsFor, pageLd } from '@/lib/seo'
+import JsonLd from '@/components/seo/JsonLd'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
@@ -9,8 +10,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: `${t('nav.offers')} — ${t('brandFull')}`,
     description: locale === 'ua'
-      ? 'Закриті пропозиції, передзамовлення капсул і приватні перегляди.'
-      : 'Closed offers, capsule pre-orders and private viewings.',
+      ? 'Закриті пропозиції Fashion West Ukraine: передзамовлення капсул, приватні перегляди в Ужгороді та bespoke-ательє від дизайнерів платформи. За запитом — менеджер платформи.'
+      : 'Closed Fashion West Ukraine offers: capsule pre-orders, private viewings in Uzhhorod, and bespoke ateliers from platform designers. By request via the platform manager.',
     alternates: altsFor(locale, '/offers'),
   }
 }
@@ -40,6 +41,33 @@ export default async function OffersPage() {
         <div className="sh-sub">{ua ? 'Закриті пропозиції редакції' : 'Closed editorial offers'}</div>
       </div>
 
+      <JsonLd data={[
+        ...pageLd({
+          locale,
+          route: '/offers',
+          name: t('nav.offers'),
+          description: ua
+            ? 'Закриті пропозиції, передзамовлення капсул і приватні перегляди.'
+            : 'Closed offers, capsule pre-orders and private viewings.',
+          brandName: t('brandFull'),
+          pageType: 'CollectionPage',
+        }),
+        {
+          '@context': 'https://schema.org',
+          '@type': 'OfferCatalog',
+          name: t('nav.offers'),
+          itemListElement: offers.map((o, i) => ({
+            '@type': 'Offer',
+            position: i + 1,
+            name: o.title,
+            description: o.body,
+            category: o.kicker,
+            url: 'https://www.instagram.com/fw.cooperation',
+            availability: 'https://schema.org/LimitedAvailability',
+          })),
+        },
+      ]} />
+
       <div style={{ padding: '0 var(--gutter) 96px' }}>
         {offers.map((o, i) => (
           <div
@@ -59,7 +87,7 @@ export default async function OffersPage() {
               <div className="kicker" style={{ marginTop: 8 }}>{o.kicker}</div>
             </div>
             <div style={{ maxWidth: 560 }}>
-              <h3 className="display" style={{ fontSize: 32, marginBottom: 12 }}>{o.title}</h3>
+              <h2 className="display" style={{ fontSize: 32, marginBottom: 12, fontWeight: 400 }}>{o.title}</h2>
               <p style={{ color: 'var(--fg-muted)', lineHeight: 1.6 }}>{o.body}</p>
             </div>
             <a href="https://www.instagram.com/fw.cooperation" target="_blank" rel="noreferrer" className="hairline-btn">{o.cta} →</a>

@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
-import { altsFor } from '@/lib/seo'
+import { altsFor, pageLd, SITE_URL, localeUrl } from '@/lib/seo'
+import JsonLd from '@/components/seo/JsonLd'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
@@ -27,8 +28,31 @@ export default async function ProjectsPage() {
     { key: 'future' as const },
   ]
 
+  const ld = [
+    ...pageLd({
+      locale,
+      route: '/projects',
+      name: t('projects.title'),
+      description: t('projects.subtitle'),
+      brandName: t('brandFull'),
+      pageType: 'CollectionPage',
+    }),
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      itemListElement: items.map((it, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: t(`projects.${it.key}`),
+        description: t(`projects.${it.key}Body`),
+        url: `${SITE_URL}${localeUrl(locale, '/projects')}#${it.key}`,
+      })),
+    },
+  ]
+
   return (
     <section className="fade-in">
+      <JsonLd data={ld} />
       <div className="sec-head">
         <div className="sh-num">N°—</div>
         <h1 className="sh-title">{t('projects.title')}</h1>
@@ -45,9 +69,9 @@ export default async function ProjectsPage() {
 
       <div className="projects-list">
         {items.map((it, i) => (
-          <div key={it.key} className="project-row">
+          <div key={it.key} id={it.key} className="project-row">
             <div className="num">№{String(i + 1).padStart(2, '0')}</div>
-            <h3>{t(`projects.${it.key}`)}</h3>
+            <h2>{t(`projects.${it.key}`)}</h2>
             <p>{t(`projects.${it.key}Body`)}</p>
           </div>
         ))}

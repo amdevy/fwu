@@ -2,6 +2,8 @@ import { getLocale, getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
 import { designers, products } from '@/lib/data/seed'
 import type { Locale } from '@/lib/types'
+import { pageLd } from '@/lib/seo'
+import JsonLd from '@/components/seo/JsonLd'
 
 const SECTION_KEYS = ['limited', 'runway', 'capsule', 'editorsChoice', 'exclusive'] as const
 
@@ -17,8 +19,18 @@ export default async function PopupPage() {
     exclusive: products.slice(2, 5),
   }
 
+  const ld = pageLd({
+    locale,
+    route: '/pop-up',
+    name: t('popup.title'),
+    description: t('popup.subtitle'),
+    brandName: t('brandFull'),
+    pageType: 'CollectionPage',
+  })
+
   return (
     <section className="fade-in">
+      <JsonLd data={ld} />
       <div className="sec-head">
         <div className="sh-num">N°—</div>
         <h1 className="sh-title">{t('popup.title')}</h1>
@@ -30,7 +42,7 @@ export default async function PopupPage() {
       </div>
 
       <div className="popup-featured">
-        <div className="kicker" style={{ marginBottom: 24 }}>{t('popup.featuredBrands')}</div>
+        <h2 className="kicker" style={{ marginBottom: 24 }}>{t('popup.featuredBrands')}</h2>
         <div className="popup-brand-row">
           {designers.slice(0, 6).map((d) => (
             <Link key={d.id} href={`/designers/${d.slug}`} className="popup-brand">

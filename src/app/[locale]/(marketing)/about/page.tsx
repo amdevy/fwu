@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import { getLocale, getTranslations } from 'next-intl/server'
 import type { Locale } from '@/lib/types'
-import { altsFor } from '@/lib/seo'
+import { altsFor, pageLd } from '@/lib/seo'
+import JsonLd from '@/components/seo/JsonLd'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
@@ -59,8 +60,20 @@ export default async function AboutPage() {
         { kicker: 'VII', title: 'Pop-Up Selection', body: 'A curated space of selected fashion pieces: limited drops, runway pieces, capsule collections, editor’s choice.' },
       ]
 
+  const ld = pageLd({
+    locale,
+    route: '/about',
+    name: t('nav.about'),
+    description: ua
+      ? 'FASHION WEST UKRAINE — національна fashion-платформа нового покоління, що об’єднує моду, бізнес, мистецтво та стратегічні колаборації.'
+      : 'FASHION WEST UKRAINE — a national next-generation fashion platform uniting fashion, business, art and strategic collaborations.',
+    brandName: t('brandFull'),
+    pageType: 'AboutPage',
+  })
+
   return (
     <section className="fade-in">
+      <JsonLd data={ld} />
       <div className="sec-head">
         <div className="sh-num">N°—</div>
         <h1 className="sh-title">{t('nav.about')}</h1>
@@ -81,7 +94,7 @@ export default async function AboutPage() {
       </div>
 
       <div style={{ padding: '0 var(--gutter) 96px' }}>
-        <div className="kicker" style={{ marginBottom: 24 }}>{ua ? 'Сім напрямів' : 'Seven directions'}</div>
+        <h2 className="kicker" style={{ marginBottom: 24 }}>{ua ? 'Сім напрямів' : 'Seven directions'}</h2>
         {pillars.map((p) => (
           <div
             key={p.kicker}

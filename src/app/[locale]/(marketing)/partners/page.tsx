@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
 import type { Locale } from '@/lib/types'
-import { altsFor } from '@/lib/seo'
+import { altsFor, pageLd } from '@/lib/seo'
+import JsonLd from '@/components/seo/JsonLd'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
@@ -48,13 +49,23 @@ export default async function PartnersPage() {
 
   return (
     <section className="fade-in">
+      <JsonLd data={pageLd({
+        locale,
+        route: '/partners',
+        name: t('nav.partners'),
+        description: ua
+          ? 'Партнери платформи FWU: бренди, медіа, освіта, локації, логістика — і Partner Privileges для аудиторії.'
+          : 'FWU platform partners: brands, media, education, venues, logistics — plus Partner Privileges for the audience.',
+        brandName: t('brandFull'),
+        pageType: 'CollectionPage',
+      })} />
       <div className="sec-head">
         <div className="sh-num">N°—</div>
         <h1 className="sh-title">{t('nav.partners')}</h1>
         <div className="sh-sub">{ua ? 'Інституції, з якими ми працюємо.' : 'Institutions we work with.'}</div>
       </div>
 
-      <div className="kicker" style={{ padding: '0 var(--gutter) 16px' }}>{t('partners.logosKicker')}</div>
+      <h2 className="kicker" style={{ padding: '0 var(--gutter) 16px' }}>{t('partners.logosKicker')}</h2>
       <div className="partner-logos">
         {partners.map((p) => (
           <div key={p.name} className="partner-logo">{p.name}</div>
