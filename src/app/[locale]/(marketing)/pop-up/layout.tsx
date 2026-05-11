@@ -7,7 +7,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const t = await getTranslations({ locale })
   return {
     title: `${t('nav.popup')} — ${t('brandFull')}`,
-    description: t('popup.subtitle'),
+    description: locale === 'ua'
+      ? 'Curated-добірка моди Fashion West Ukraine — обмежені дропи, речі з показів, капсульні колекції та редакційна добірка. Не магазин і не маркетплейс, а простір відібраних речей.'
+      : 'Fashion West Ukraine curated selection — limited drops, runway pieces, capsule collections and editor’s choice. Not a shop or marketplace, but a space of selected fashion.',
     alternates: altsFor(locale, '/pop-up'),
   }
 }

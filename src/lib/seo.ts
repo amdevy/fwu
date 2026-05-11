@@ -34,3 +34,35 @@ export const breadcrumbLd = (
     item: `${SITE_URL}${localeUrl(locale, c.route)}`,
   })),
 })
+
+type PageLdOptions = {
+  locale: string
+  route: string
+  name: string
+  description: string
+  brandName: string
+  pageType?: 'WebPage' | 'AboutPage' | 'CollectionPage' | 'ContactPage'
+}
+
+export const pageLd = ({
+  locale,
+  route,
+  name,
+  description,
+  brandName,
+  pageType = 'WebPage',
+}: PageLdOptions) => [
+  {
+    '@context': 'https://schema.org',
+    '@type': pageType,
+    name,
+    url: `${SITE_URL}${localeUrl(locale, route)}`,
+    description,
+    inLanguage: locale === 'ua' ? 'uk-UA' : 'en-US',
+    isPartOf: { '@type': 'WebSite', name: brandName, url: SITE_URL },
+  },
+  breadcrumbLd(locale, [
+    { name: brandName, route: '' },
+    { name, route },
+  ]),
+]

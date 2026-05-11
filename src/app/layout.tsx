@@ -26,19 +26,10 @@ export const metadata: Metadata = {
   },
   description:
     'Fashion West Ukraine — елітний шоурум і fashion-платформа Закарпаття: українські дизайнери, закриті колекції, події, партнери. Ужгород, Львів, Україна.',
-  keywords: [
-    'Fashion West Ukraine',
-    'Fashion West',
-    'українські дизайнери',
-    'дизайнерський одяг Україна',
-    'мода Закарпаття',
-    'модний показ Ужгород',
-    'elite fashion Ukraine',
-    'купити українські бренди одягу',
-  ],
   openGraph: {
     type: 'website',
     locale: 'uk_UA',
+    alternateLocale: ['en_US'],
     url: SITE_URL,
     siteName: 'Fashion West Ukraine',
     title: 'Fashion West Ukraine — елітна fashion-платформа Закарпаття',
@@ -53,9 +44,11 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
   alternates: {
+    canonical: '/',
     languages: {
-      'uk-UA': '/ua',
+      'uk-UA': '/',
       'en-US': '/en',
+      'x-default': '/',
     },
   },
 }

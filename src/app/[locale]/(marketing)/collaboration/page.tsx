@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { getLocale, getTranslations } from 'next-intl/server'
-import { altsFor } from '@/lib/seo'
+import { altsFor, pageLd } from '@/lib/seo'
+import JsonLd from '@/components/seo/JsonLd'
 import CollabForm from './CollabForm'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -20,8 +21,29 @@ export default async function CollaborationPage() {
 
   const directions = ['designers', 'brands', 'media', 'sponsors', 'international'] as const
 
+  const ld = [
+    ...pageLd({
+      locale,
+      route: '/collaboration',
+      name: t('collab.title'),
+      description: t('collab.subtitle'),
+      brandName: t('brandFull'),
+      pageType: 'WebPage',
+    }),
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: directions.map((d) => ({
+        '@type': 'Question',
+        name: t(`collab.${d}`),
+        acceptedAnswer: { '@type': 'Answer', text: t(`collab.${d}Body`) },
+      })),
+    },
+  ]
+
   return (
     <section className="fade-in">
+      <JsonLd data={ld} />
       <div className="sec-head">
         <div className="sh-num">N°—</div>
         <h1 className="sh-title">{t('collab.title')}</h1>
@@ -40,7 +62,7 @@ export default async function CollaborationPage() {
         {directions.map((d, i) => (
           <div key={d} className="collab-cell">
             <div className="kicker">№{String(i + 1).padStart(2, '0')}</div>
-            <h3>{t(`collab.${d}`)}</h3>
+            <h2>{t(`collab.${d}`)}</h2>
             <p>{t(`collab.${d}Body`)}</p>
           </div>
         ))}

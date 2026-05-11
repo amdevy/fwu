@@ -31,8 +31,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       '@type': 'Organization',
       name: t('brandFull'),
       url: SITE_URL,
-      logo: `${SITE_URL}/icon.png`,
-      sameAs: ['https://instagram.com/fashionwestukraine'],
+      logo: `${SITE_URL}/android-chrome-512x512.png`,
+      sameAs: [
+        'https://www.instagram.com/fw.ukraine',
+        'https://www.instagram.com/fw.cooperation',
+        'https://www.threads.com/@fw.ukraine',
+      ],
     },
     {
       '@context': 'https://schema.org',

@@ -64,6 +64,20 @@ export const photographers: Photographer[] = [
     ...FWU_2026,
   },
   {
+    id: 'nataliia-synkovych',
+    slug: 'nataliia-synkovych',
+    name: { ua: 'Наталія Синькович', en: 'Nataliia Synkovych' },
+    driveMainUrl: 'https://drive.google.com/drive/folders/1RIoRN_XE74tSRbNx3dA7jJqum72rQw-j',
+    designerFolders: {},
+    generalFolders: [
+      { label: { ua: 'FWU (загальне)', en: 'FWU (general)' }, url: 'https://drive.google.com/open?id=1SVU8nfayNX89HaGuTjmQNDvWQiIzvDdJ' },
+      { label: { ua: 'Gala party', en: 'Gala party' }, url: 'https://drive.google.com/open?id=1El-4bSwxddThOe0TutgAzwaw8maC4MsT' },
+      { label: { ua: 'LAUD', en: 'LAUD' }, url: 'https://drive.google.com/open?id=1YIMVoVrkVx4ZQzpDuC8MCGTRwHfN0PNw' },
+      { label: { ua: 'Дизайнери, спікери, партнери', en: 'Designers, speakers & partners' }, url: 'https://drive.google.com/open?id=1El9qFJm3ih-L1GGhxlZ4pvf9dlLZSPMr' },
+    ],
+    ...FWU_2026,
+  },
+  {
     id: 'olha-khmil',
     slug: 'olha-khmil',
     name: { ua: 'Ольга Хміль', en: 'Olha Khmil' },

@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { designers, products } from '@/lib/data/seed'
+import { photographers } from '@/lib/data/photographers'
 import { locales } from '@/i18n/config'
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://fashionwestukraine.com'
@@ -15,6 +16,8 @@ const STATIC_ROUTES = [
   '/offers',
   '/new-direction',
   '/contacts',
+  '/photographers',
+  '/event/2026',
 ] as const
 
 const localizedUrl = (locale: string, route: string) => {
@@ -61,5 +64,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   )
 
-  return [...staticEntries, ...designerEntries, ...productEntries]
+  const photographerEntries = photographers.flatMap((p) =>
+    locales.map((locale) => ({
+      url: localizedUrl(locale, `/photographers/${p.slug}`),
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+      alternates: alternates(`/photographers/${p.slug}`),
+    })),
+  )
+
+  return [...staticEntries, ...designerEntries, ...productEntries, ...photographerEntries]
 }

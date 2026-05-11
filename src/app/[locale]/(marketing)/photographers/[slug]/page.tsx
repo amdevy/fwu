@@ -47,16 +47,26 @@ export default async function PhotographerPage({ params }: { params: Promise<{ s
 
   return (
     <article className="fade-in">
-      <header style={{ padding: '64px var(--gutter) 32px' }}>
-        <div className="kicker">{p.eventLabel[locale]} · {p.eventDate}</div>
-        <h1 className="display" style={{ fontSize: 'clamp(40px, 6vw, 72px)', marginTop: 12 }}>
-          {p.name[locale]}
-        </h1>
-        {p.bio?.[locale] && (
-          <p className="lede" style={{ maxWidth: 720, marginTop: 16 }}>{p.bio[locale]}</p>
-        )}
+      <header
+        style={{
+          padding: '64px var(--gutter) 32px',
+          display: 'grid',
+          gridTemplateColumns: p.avatar ? 'minmax(0, 1fr) 280px' : '1fr',
+          gap: 48,
+          alignItems: 'end',
+        }}
+        className="photog-header"
+      >
+        <div>
+          <div className="kicker">{p.eventLabel[locale]} · {p.eventDate}</div>
+          <h1 className="display" style={{ fontSize: 'clamp(40px, 6vw, 72px)', marginTop: 12 }}>
+            {p.name[locale]}
+          </h1>
+          {p.bio?.[locale] && (
+            <p className="lede" style={{ maxWidth: 720, marginTop: 16 }}>{p.bio[locale]}</p>
+          )}
 
-        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 24 }}>
+          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 24 }}>
           {isReady(p.driveMainUrl) ? (
             <a href={p.driveMainUrl} target="_blank" rel="noreferrer" className="hairline-btn solid">
               {ua ? 'Повний архів на Google Drive →' : 'Full archive on Google Drive →'}
@@ -71,7 +81,13 @@ export default async function PhotographerPage({ params }: { params: Promise<{ s
               Instagram · @{p.instagram} →
             </a>
           )}
+          </div>
         </div>
+        {p.avatar && (
+          <div className="photog-portrait">
+            <img src={p.avatar} alt={p.name[locale]} />
+          </div>
+        )}
       </header>
 
       {designerEntries.length > 0 && (

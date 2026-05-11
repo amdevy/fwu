@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import { getLocale, getTranslations } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
 import type { Locale } from '@/lib/types'
-import { altsFor } from '@/lib/seo'
+import { altsFor, pageLd } from '@/lib/seo'
+import JsonLd from '@/components/seo/JsonLd'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
@@ -10,8 +11,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: `${locale === 'ua' ? 'Новий напрям' : 'New direction'} — ${t('brandFull')}`,
     description: locale === 'ua'
-      ? 'Куди прямує платформа Fashion West Ukraine — нова редакційна лінія.'
-      : 'Where the Fashion West Ukraine platform is heading — the new editorial line.',
+      ? 'Куди прямує платформа Fashion West Ukraine — нова редакційна лінія: журнал з архівом тканин, капсули з музеями та шоурум-резиденція в Ужгороді.'
+      : 'Where the Fashion West Ukraine platform is heading — the new editorial line: a quarterly journal with a textile archive, capsules with museums, and a showroom residency in Uzhhorod.',
     alternates: altsFor(locale, '/new-direction'),
   }
 }
@@ -23,6 +24,15 @@ export default async function NewDirectionPage() {
 
   return (
     <section className="fade-in">
+      <JsonLd data={pageLd({
+        locale,
+        route: '/new-direction',
+        name: ua ? 'Новий напрям' : 'New direction',
+        description: ua
+          ? 'Куди прямує платформа Fashion West Ukraine — нова редакційна лінія: журнал з архівом тканин, капсули з музеями та шоурум-резиденція в Ужгороді.'
+          : 'Where the Fashion West Ukraine platform is heading — the new editorial line: a quarterly journal with a textile archive, capsules with museums, and a showroom residency in Uzhhorod.',
+        brandName: t('brandFull'),
+      })} />
       <div className="sec-head">
         <div className="sh-num">N°—</div>
         <h1 className="sh-title">{ua ? 'Новий напрям' : 'New direction'}</h1>
@@ -37,6 +47,7 @@ export default async function NewDirectionPage() {
         </p>
       </div>
 
+      <h2 className="kicker" style={{ padding: '0 var(--gutter) 16px' }}>{ua ? 'Дорожня карта' : 'Roadmap'}</h2>
       <div className="timeline">
         {(ua
           ? [
