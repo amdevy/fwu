@@ -43,8 +43,7 @@ export default async function PhotographersPage() {
               key={p.id}
               href={`/photographers/${p.slug}`}
               style={{
-                display: 'grid',
-                gridTemplateColumns: '80px 1fr auto auto',
+                display: 'flex',
                 gap: 32,
                 alignItems: 'baseline',
                 padding: '40px 0',
@@ -52,19 +51,19 @@ export default async function PhotographersPage() {
                 textDecoration: 'none',
                 color: 'inherit',
               }}
-              className="aa-row"
+              className="photog-list-row"
             >
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, letterSpacing: '0.14em', color: 'var(--fg-muted)' }}>
+              <div style={{ width: 60, flexShrink: 0, fontFamily: 'var(--font-mono)', fontSize: 12, letterSpacing: '0.14em', color: 'var(--fg-muted)' }}>
                 N°{String(i + 1).padStart(2, '0')}
               </div>
               <div className="display" style={{ fontSize: 'clamp(28px, 4vw, 48px)', lineHeight: 1.05 }}>
                 {p.name[locale]}
               </div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, letterSpacing: '0.06em', color: 'var(--fg-muted)', textAlign: 'right' }}>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, letterSpacing: '0.06em', color: 'var(--fg-muted)' }}>
                 {designerCount} {ua ? 'дизайнерів' : 'designers'}
                 {generalCount > 0 && ` · ${generalCount} ${ua ? 'загальних' : 'general'}`}
               </div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--fg-muted)' }}>
+              <div style={{ marginLeft: 'auto', fontFamily: 'var(--font-mono)', fontSize: 12, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--fg-muted)' }}>
                 {ua ? 'Відкрити →' : 'Open →'}
               </div>
             </Link>

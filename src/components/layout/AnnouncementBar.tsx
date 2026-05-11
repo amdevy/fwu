@@ -26,24 +26,37 @@ export function AnnouncementBar() {
   }
 
   return (
-    <div className="announce-bar">
-      <div className="announce-inner">
-        <span className="announce-tag">NEW</span>
-        <Link href="/event/2026" className="announce-text">
-          <span className="announce-text-full">
-            {ua
-              ? 'Архіви FWU 2026 від фотографів події вже доступні'
-              : 'FWU 2026 archives from event photographers are now live'}
-          </span>
-          <span className="announce-text-short">
-            {ua ? 'Архіви FWU 2026' : 'FWU 2026 archives'}
-          </span>
-          <span className="announce-arrow"> →</span>
-        </Link>
-        <button className="announce-close" onClick={dismiss} aria-label="Dismiss">
-          ✕
-        </button>
+    <div className='announce-bar'>
+      <div className='announce-inner'>
+        <div>
+          <span className='announce-tag'>NEW</span>
+          <Link href='/event/2026' className='announce-text'>
+            <span className='announce-text-full'>
+              {ua
+                ? 'Архіви FWU 2026 від фотографів події вже доступні'
+                : 'FWU 2026 archives from event photographers are now live'}
+            </span>
+            <span className='announce-text-short'>
+              {ua ? 'Архіви FWU 2026' : 'FWU 2026 archives'}
+            </span>
+            <img
+              className='announce-arrow'
+              src='/svg/click.svg'
+              width={16}
+              height={16}
+              alt=''
+              aria-hidden='true'
+            />
+          </Link>
+          <button
+            className='announce-close'
+            onClick={dismiss}
+            aria-label='Dismiss'
+          >
+            ✕
+          </button>
+        </div>
       </div>
     </div>
-  )
+  );
 }
